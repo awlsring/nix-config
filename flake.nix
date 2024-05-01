@@ -14,14 +14,15 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgsUnstable,
     home-manager,
     ...
   } @ inputs: let
     inherit (self) outputs;
+    lib = nixpkgs.lib // home-manager.lib;
   in {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#machine'
+    inherit lib;
     nixosConfigurations = {
       # Garage Storage - Naya
       naya = nixpkgs.lib.nixosSystem {
@@ -33,7 +34,7 @@
     homeConfigurations = {
       "awlsring@naya" = lib.homeManagerConfiguration {
         modules = [./home-manager/home.nix];
-        pkgs = pkgsFor.x86_64-linux;
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {
           inherit inputs outputs;
         };

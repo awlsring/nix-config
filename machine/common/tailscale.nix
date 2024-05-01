@@ -1,10 +1,7 @@
-{ lib, inputs, ... }:
-let
-  unstable = inputs.nixpkgsUnstable.legacyPackages.${config.system};
-in
+{ config, pkgs, ... }:
 {
   # make the tailscale command usable to users
-  environment.systemPackages = [ unstable.tailscale ];
+  environment.systemPackages = [ pkgs.tailscale ];
 
   # enable the tailscale service
   services.tailscale.enable = true;
@@ -32,7 +29,7 @@ in
       fi
 
       # otherwise authenticate with tailscale
-      ${tailscale}/bin/tailscale up -authkey tskey-examplekeyhere --hostname ${networking.hostName}
+      ${tailscale}/bin/tailscale up -authkey tskey-example
     '';
   };
 
@@ -47,4 +44,3 @@ in
     allowedUDPPorts = [ config.services.tailscale.port ];
   };
 }
-
