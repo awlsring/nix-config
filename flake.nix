@@ -4,7 +4,7 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixpkgsUnstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager/release-23.11";
@@ -14,11 +14,12 @@
   outputs = {
     self,
     nixpkgs,
+    unstable,
     home-manager,
     ...
   } @ inputs: let
     inherit (self) outputs;
-    lib = nixpkgs.lib // home-manager.lib;
+    lib = nixpkgs.lib // home-manager.lib // unstable.lib;
   in {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#machine'
