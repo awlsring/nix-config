@@ -17,7 +17,7 @@ in
             replication_mode = "3";
 
             rpc_bind_addr = "[::]:3901";
-            rpc_secret_file = config.sops.secrets."garage/rpc".path
+            rpc_secret_file = config.sops.secrets."garage/rpc".path;
 
             s3_api = {
                 s3_region = "dws";
