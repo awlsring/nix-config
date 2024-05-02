@@ -6,6 +6,8 @@
   # enable the tailscale service
   services.tailscale.enable = true;
 
+  sops.secrets."tailscale/oauth/secret" = { };
+
   systemd.services.tailscale-autoconnect = {
     description = "Automatic connection to Tailscale";
 
@@ -29,7 +31,7 @@
       fi
 
       # otherwise authenticate with tailscale
-      ${tailscale}/bin/tailscale up --auth-key=$(cat ${config.sops.secrets.tailscale.path})?preauthorized=true
+      ${tailscale}/bin/tailscale up --auth-key=$(cat ${config.sops.secrets."tailscale/oauth/secret".path})?preauthorized=true
     '';
   };
 

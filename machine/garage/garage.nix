@@ -23,7 +23,7 @@ in
     users = {
         users = {
             ${garageUser} = {
-                isSystemUSer = true;
+                isSystemUser = true;
                 group = garageUser;
             };
         };
@@ -35,7 +35,7 @@ in
     systemd.services.garage.serviceConfig.User = garageUser;
     systemd.services.garage.serviceConfig.Group = garageUser;
 
-    networking.firewall.allowedTCPPorts = [ 3900 3901 3902 ];
+    networking.firewall.allowedTCPPorts = [ 3900 3901 3902 3903 3904];
 
     services.garage = {
         enable = true;
@@ -57,6 +57,7 @@ in
 
             s3_web = {
                 bind_addr = "[::]:3902";
+                root_domain = "drigs.org";
             };
 
             k2v_api = {
