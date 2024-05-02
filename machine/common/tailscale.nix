@@ -29,7 +29,7 @@
       fi
 
       # otherwise authenticate with tailscale
-      ${tailscale}/bin/tailscale up -authkey tskey-example
+      ${tailscale}/bin/tailscale up --auth-key=$(cat ${config.sops.secrets.tailscale.path})?preauthorized=true
     '';
   };
 

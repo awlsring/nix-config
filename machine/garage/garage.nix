@@ -12,14 +12,12 @@ in
     services.garage = {
         enable = true;
         package = unstable.garage_1_x;
-        environmentFile = pkgs.writeText "garage-env" ''
-          GARAGE_RPC_SECRET=$(openssl rand -hex 32)
-        '';
         settings = {
             db_engine = "lmdb";
             replication_mode = "3";
 
             rpc_bind_addr = "[::]:3901";
+            rpc_secret_file = config.sops.secrets."garage/rpc".path
 
             s3_api = {
                 s3_region = "dws";

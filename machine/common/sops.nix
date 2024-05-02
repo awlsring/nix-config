@@ -1,10 +1,10 @@
 { config, pkgs, inputs, ... }:
 {
   imports = [
-    inputs.sops-nix.nixosModules.Sops
+    inputs.sops-nix.nixosModules.sops
   ];
 
-  sops.defaultSopsFile = ../../secrets/sops.yaml;
+  sops.defaultSopsFile = ../../secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
-  sops.age.keyFile = "~/.config/sops/keys/age/keys.txt";
+  sops.age.keyFile = "/home/awlsring/.config/sops/age/keys.txt";
 }
