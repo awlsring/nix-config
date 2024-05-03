@@ -31,7 +31,7 @@
       fi
 
       # otherwise authenticate with tailscale
-      ${tailscale}/bin/tailscale up --auth-key=$(cat ${config.sops.secrets."tailscale/oauth/secret".path})?preauthorized=true --advertise-tags=tag:garage-cluster
+      ${tailscale}/bin/tailscale up --auth-key=$(cat ${config.sops.secrets."tailscale/oauth/secret".path})?ephemeral=false&preauthorized=true --advertise-tags=tag:garage-cluster
     '';
   };
 
