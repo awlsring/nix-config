@@ -55,6 +55,7 @@
   };
 
   tailscale.enable = true;
+  tailscale.tag = "garage-cluster";
 
   networking.hostName = "naya";
   networking.networkmanager.enable = true;

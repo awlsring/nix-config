@@ -3,7 +3,8 @@
   options = {
     tailscale = {
       enable = lib.mkEnableOption "enables tailscale";
-      tag = lib.mkStringOption {
+      tag = lib.mkOption {
+        type = lib.types.str;
         default = "nix";
         description = "The tag to advertise to the Tailscale network";
       };
@@ -17,6 +18,7 @@
     # enable the tailscale service
     services.tailscale.enable = true;
 
+    # TODO: make secret name configurable
     sops.secrets."tailscale/oauth/secret" = { };
 
     systemd.services.tailscale-autoconnect = {
