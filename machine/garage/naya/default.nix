@@ -11,7 +11,7 @@
   imports = [
     ./hardware-configuration.nix
     ../garage.nix
-    ../../common/tailscale.nix
+    # ../../common/tailscale.nix
     ../../common/sops.nix
   ];
 
@@ -53,6 +53,8 @@
     registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
+
+  tailscale.enable = true;
 
   networking.hostName = "naya";
   networking.networkmanager.enable = true;

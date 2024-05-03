@@ -31,7 +31,10 @@
       # Garage Storage - Naya
       naya = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        modules = [./machine/garage/naya];
+        modules = [
+          ./machine/garage/naya
+          ./modules
+        ];
       };
     };
 
