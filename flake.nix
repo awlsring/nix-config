@@ -23,10 +23,20 @@
   } @ inputs: let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib // unstable.lib;
+    systems = [
+      "x86_64-linux"
+      "aarch64-linux"
+      "aarch64-darwin"
+    ];
+
+    forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f {
+      pkgs = import nixpkgs { inherit system; };
+    });
   in {
+    inherit lib;
+    
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#machine'
-    inherit lib;
     nixosConfigurations = {
       # Garage Storage - Naya
       naya = nixpkgs.lib.nixosSystem {
