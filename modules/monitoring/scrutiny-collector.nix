@@ -1,5 +1,12 @@
 { config, pkgs, lib, ... }:
+let
+  unstable = inputs.unstable.legacyPackages.x86_64-linux;
+in
 {
+  environment.systemPackages = with unstable; [
+    garage
+  ];
+
   options = {
     "scrutiny-collector" = {
       enable = lib.mkEnableOption "enables scrutiny collector";
