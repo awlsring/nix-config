@@ -1,4 +1,4 @@
-{ config, inputs, pkgs, ... }:
+{ config, inputs, pkgs, lib, ... }:
 {
   disabledModules = [
     "services/web-servers/garage.nix"
@@ -22,13 +22,13 @@
   config = {
     sops.secrets = {
         "garage/rpc" = {
-            owner = garageUser;
+            owner = config.garage.user;
         };
         "garage/admin" = {
-            owner = garageUser;
+            owner = config.garage.user;
         };
         "garage/metrics" = {
-            owner = garageUser;
+            owner = config.garage.user;
         };
     };
 
@@ -51,7 +51,7 @@
 
     services.garage = {
         enable = true;
-        package = inputs.unstable.garage_1_x;
+        package = inputs.unstable.legacyPackages.x86_64-linux.garage_1_x;
         settings = {
             db_engine = "lmdb";
             replication_mode = "3";

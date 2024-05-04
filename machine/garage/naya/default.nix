@@ -10,8 +10,6 @@
   # You can import other NixOS modules here
   imports = [
     ./hardware-configuration.nix
-    ../garage.nix
-    # ../../common/tailscale.nix
     ../../common/sops.nix
   ];
 
@@ -56,6 +54,10 @@
 
   tailscale.enable = true;
   tailscale.tag = "garage-cluster";
+
+  garage.enable = true;
+
+  "node-exporter".enable = true;
 
   networking.hostName = "naya";
   networking.networkmanager.enable = true;

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, inputs, pkgs, lib, ... }:
 {
   disabledModules = [
     "services/monitoring/scrutiny.nix"
