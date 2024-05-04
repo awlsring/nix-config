@@ -2,6 +2,6 @@
   imports = [
     ./services/tailscale.nix
     ./monitoring/node-exporter.nix
-    ./monitoring/scrutiny.nix
+    ./monitoring/scrutiny-collector.nix
   ];
 }
