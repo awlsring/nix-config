@@ -1,13 +1,25 @@
 { config, inputs, pkgs, ... }:
-let
-  unstable = inputs.unstable.legacyPackages.x86_64-linux;
-  garageUser = "garage";
-in
 {
-    environment.systemPackages = with unstable; [
-        garage
-    ];
+  disabledModules = [
+    "services/web-servers/garage.nix"
+  ];
 
+  imports = [
+    "${inputs.unstable}/nixos/modules/services/web-servers/garage.nix"
+  ];
+
+  options = {
+    garage = {
+      enable = lib.mkEnableOption "enables garage";
+      user = lib.mkOption {
+        type = lib.types.str;
+        default = "garage";
+        description = "The user that garage will run as";
+      };
+    };
+  };
+
+  config = {
     sops.secrets = {
         "garage/rpc" = {
             owner = garageUser;
@@ -22,24 +34,24 @@ in
 
     users = {
         users = {
-            ${garageUser} = {
+            ${config.garage.user} = {
                 isSystemUser = true;
-                group = garageUser;
+                group = config.garage.user;
             };
         };
         groups = {
-            ${garageUser} = { };          
+            ${config.garage.user} = { };          
         };
     };
 
-    systemd.services.garage.serviceConfig.User = garageUser;
-    systemd.services.garage.serviceConfig.Group = garageUser;
+    systemd.services.garage.serviceConfig.User = config.garage.user;
+    systemd.services.garage.serviceConfig.Group = config.garage.user;
 
     networking.firewall.allowedTCPPorts = [ 3900 3901 3902 3903 3904];
 
     services.garage = {
         enable = true;
-        package = unstable.garage_1_x;
+        package = inputs.unstable.garage_1_x;
         settings = {
             db_engine = "lmdb";
             replication_mode = "3";
@@ -71,4 +83,5 @@ in
             };
         };
     };
+  };
 }

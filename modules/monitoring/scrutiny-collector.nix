@@ -1,10 +1,11 @@
 { config, pkgs, lib, ... }:
-let
-  unstable = inputs.unstable.legacyPackages.x86_64-linux;
-in
 {
-  environment.systemPackages = with unstable; [
-    garage
+  disabledModules = [
+    "services/monitoring/scrutiny.nix"
+  ];
+
+  imports = [
+    "${inputs.unstable}/nixos/modules/services/monitoring/scrutiny.nix"
   ];
 
   options = {
