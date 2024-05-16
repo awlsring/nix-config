@@ -43,10 +43,19 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild switch --flake .#machine'
     nixosConfigurations = {
+      # Workstation - Toes
       toes = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./machine/workstation/toes
+          ./modules
+        ];
+      };
+      # Workstation - Chungus
+      chungus = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./machine/workstation/chungus
           ./modules
         ];
       };
@@ -68,7 +77,13 @@
           inherit inputs outputs;
         };
       };
-
+      "awlsring@chungus" = lib.homeManagerConfiguration {
+        modules = [./home-manager/home.nix];
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {
+          inherit inputs outputs;
+        };
+      };
       "awlsring@naya" = lib.homeManagerConfiguration {
         modules = [./home-manager/home.nix];
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
