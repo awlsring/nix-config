@@ -19,7 +19,7 @@
     };
   };
 
-  config = {
+  config = lib.mkIf config.garage.enable {
     sops.secrets = {
         "garage/rpc" = {
             owner = config.garage.user;
