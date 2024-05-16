@@ -56,6 +56,9 @@
     jq
     nixd
     awscli2
+    kitty
+    _1password-gui
+    _1password
 
     # talk
     slack
