@@ -67,8 +67,13 @@
 
     vscode
 
-    steam 
+    protontricks
+    protonup
   ];
+
+  home.sessionVariables = {
+    STEAM_EXTRA_COMPAT_TOOLS_PATH = "\${HOME}/.steam/root/compatibilitytools.d";
+  };
 
   # Enable home-manager and git
   programs.home-manager.enable = true;

@@ -16,7 +16,11 @@
     ../../common/sops.nix
   ];
 
-  environment.systemPackages = [ pkgs.git ];
+  environment.systemPackages = with pkgs; [
+    git
+    mangohud
+    protonup
+  ];
 
   nixpkgs = {
     # You can add overlays here
@@ -125,10 +129,36 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+  # Force Wayland
+  environment.sessionVariables."NIXOS_OZONE_WL" = "1";
+
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.displayManager.gdm.autoSuspend = false;
+
+  # Graphics
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
+  # Enable nvidia drivers
+  services.xserver.videoDrivers = ["nvidia"];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+  services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+
+  # Enable steam
+  programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
+  programs.gamemode.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
