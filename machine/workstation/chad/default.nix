@@ -37,7 +37,6 @@
     casks = [
       "1password"
       "bartender"
-      "firefox"
       "hammerspoon"
       "obsidian"
       "discord"
@@ -48,9 +47,9 @@
 
   system.defaults = {
     dock = {
-      autohide = true;
-      orientation = "left";
-      show-process-indicators = false;
+      autohide = false;
+      orientation = "bottom";
+      show-process-indicators = true;
       show-recents = false;
       static-only = true;
     };
