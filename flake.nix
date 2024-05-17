@@ -6,6 +6,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Nix Darwin
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
     # Sops
     sops-nix.url = "github:Mic92/sops-nix";
 
@@ -22,6 +26,7 @@
     nixpkgs,
     unstable,
     home-manager,
+    nix-darwin,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -69,7 +74,25 @@
       };
     };
 
+    # MacBook
+    darwinConfigurations = {
+      chad = nix-darwin.lib.darwinSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./machine/workstation/chad
+        ];
+        system = "aarch64-darwin";
+      };
+    };
+
     homeConfigurations = {
+      "awlsring@chad" = lib.homeManagerConfiguration {
+        modules = [./home-manager/darwin];
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+        extraSpecialArgs = {
+          inherit inputs outputs;
+        };
+      };
       "awlsring@toes" = lib.homeManagerConfiguration {
         modules = [./home-manager/home.nix];
         pkgs = nixpkgs.legacyPackages.x86_64-linux;

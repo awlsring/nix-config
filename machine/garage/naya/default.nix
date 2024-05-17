@@ -59,6 +59,8 @@
 
   "node-exporter".enable = true;
 
+  # "scrutiny-collector".enable = true;
+
   networking.hostName = "naya";
   networking.networkmanager.enable = true;
 
