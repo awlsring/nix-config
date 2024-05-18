@@ -8,7 +8,7 @@
   pkgs,
   ...
 }: {
-  home.packages = with pkgs; [ 
+  home.packages = with pkgs; [
     # utils
     bc
     bottom
@@ -20,6 +20,7 @@
     awscli2
     _1password
     kitty
+    alejandra
     tmux
   ];
 

@@ -9,9 +9,9 @@
   nixpkgs = {
     # You can add overlays here
     overlays = [
-     outputs.overlays.additions
-     outputs.overlays.modifications
-     outputs.overlays.unstable-packages
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.stable
     ];
     # Configure your nixpkgs instance
     config = {

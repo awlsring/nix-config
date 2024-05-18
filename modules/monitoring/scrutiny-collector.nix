@@ -1,12 +1,5 @@
 { config, inputs, pkgs, lib, ... }:
 {
-  disabledModules = [
-    "services/monitoring/scrutiny.nix"
-  ];
-
-  imports = [
-    "${inputs.unstable}/nixos/modules/services/monitoring/scrutiny.nix"
-  ];
 
   options = {
     "scrutiny-collector" = {

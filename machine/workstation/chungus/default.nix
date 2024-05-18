@@ -1,5 +1,3 @@
-# This is your system's configuration file.
-# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
   inputs,
   outputs,
@@ -8,9 +6,7 @@
   pkgs,
   ...
 }: {
-  # You can import other NixOS modules here
   imports = [
-    
     inputs.vscode-server.nixosModules.default
     ./hardware-configuration.nix
     ../../common/sops.nix
@@ -23,24 +19,12 @@
   ];
 
   nixpkgs = {
-    # You can add overlays here
     overlays = [
       outputs.overlays.additions
       outputs.overlays.modifications
-      outputs.overlays.unstable-packages
-      # If you want to use overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
+      outputs.overlays.stable
     ];
-    # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
     };
   };
@@ -49,15 +33,11 @@
     flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
   in {
     settings = {
-      # Enable flakes and new 'nix' command
       experimental-features = "nix-command flakes";
-      # Opinionated: disable global registry
       flake-registry = "";
     };
-    # Opinionated: disable channels
     channel.enable = false;
 
-    # Opinionated: make flake registry and nix path match flake inputs
     registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
@@ -74,6 +54,7 @@
   users.users = {
     awlsring = {
       home = "/home/awlsring";
+      shell = pkgs.zsh;
       createHome = true;
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
@@ -81,16 +62,8 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOnue0VrH7rYvnJYSpHKTjKw0/Kzkd+YTYvYwzH1hujv awlsring"
       ];
       extraGroups = ["docker" "networkmanager" "wheel" "audio"];
-      packages = with pkgs; [
-        # firefox
-        # vscode
-        # git
-      #  thunderbird
-      ];
     };
   };
-
-  # from config
 
   sound.enable = false;
   hardware.pulseaudio.enable = false;
@@ -100,12 +73,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
     jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
   # Set your time zone.
@@ -129,14 +97,11 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Force Wayland
-  environment.sessionVariables."NIXOS_OZONE_WL" = "1";
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.wayland = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.displayManager.gdm.autoSuspend = false;
+  # Force Wayland for Electron apps
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+  };
 
   # Graphics
   hardware.opengl = {
@@ -155,15 +120,36 @@
   };
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
 
+  programs.zsh.enable = true;
+
   # Enable steam
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
 
-  # Configure keymap in X11
-  services.xserver = {
+  # Configure environment
+  xdg = {
+    autostart.enable = true;
+    portal = {
+      enable = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal
+        pkgs.xdg-desktop-portal-gtk
+      ];
+    };
+  };
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+  services.xserver.displayManager = {
+    gdm = {
+      enable = true;
+      wayland = true;
+    };
+  };
+  services.xserver.xkb = {
     layout = "us";
-    xkbVariant = "workman";
   };
 
   # Enable CUPS to print documents.
@@ -174,6 +160,20 @@
     settings = {
       PermitRootLogin = "no";
       PasswordAuthentication = false;
+    };
+  };
+
+  fonts.packages = with pkgs; [
+    (pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "Iosevka" "FiraCode"];})
+    cm_unicode
+  ];
+
+  fonts.enableDefaultPackages = true;
+  fonts.fontconfig = {
+    defaultFonts = {
+      monospace = ["JetBrainsMono Nerd Font Mono"];
+      sansSerif = ["JetBrainsMono Nerd Font"];
+      serif = ["JetBrainsMono Nerd Font"];
     };
   };
 

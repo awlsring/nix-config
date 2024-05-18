@@ -1,12 +1,8 @@
 { config, inputs, pkgs, lib, ... }:
 {
-  disabledModules = [
-    "services/web-servers/garage.nix"
-  ];
-
-  imports = [
-    "${inputs.unstable}/nixos/modules/services/web-servers/garage.nix"
-  ];
+  # disabledModules = [
+  #   "services/web-servers/garage.nix"
+  # ];
 
   options = {
     garage = {
@@ -51,7 +47,7 @@
 
     services.garage = {
         enable = true;
-        package = inputs.unstable.legacyPackages.x86_64-linux.garage_1_x;
+        package = pkgs.unstable.garage_1_x;
         settings = {
             db_engine = "lmdb";
             replication_mode = "3";

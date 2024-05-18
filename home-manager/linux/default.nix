@@ -9,14 +9,26 @@
   ...
 }: {
   imports = [
-    "../common.nix"
-    "../apps.nix"
-    "../gaming.nix"
-    "..tools.nix"
+    inputs.nix-colors.homeManagerModules.default
+    ../common.nix
+    ../apps.nix
+    ../gaming.nix
+    ../tools.nix
+    ../neovim
+    ../terminal.nix
+    ../zsh.nix
+    ../hyprland.nix
   ];
 
   home = {
     username = "awlsring";
     homeDirectory = "/home/awlsring";
+    sessionVariables = {
+      EDITOR = "nvim";
+      BROWSER = "firefox";
+      TERMINAL = "kitty";
+    };
   };
+
+  colorScheme = inputs.nix-colors.colorSchemes.tokyo-night-dark;
 }
