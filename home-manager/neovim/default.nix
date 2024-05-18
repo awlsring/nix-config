@@ -10,30 +10,83 @@
     # ./ui.nix
   ];
 
-  # programs.nixvim = {
-  #   enable = true;
-  #   colorschemes.gruvbox.enable = true;
-  #   plugins.lightline.enable = true;
-  # };
+  programs.neovim = let
+  in {
+    enable = true;
 
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
 
-  # home.sessionVariables.EDITOR = "nvim";
+    extraLuaConfig = ''
+      ${builtins.readFile ./config/init.lua}
+    '';
 
-  # xdg.configFile.nvim.source = ./config;
+    plugins = with pkgs.vimPlugins; [
+      {
+        plugin = comment-nvim;
+        type = "lua";
+        config = "require(\"Comment\").setup()";
+      }
+      {
+        plugin = gruvbox-nvim;
+        config = "colorscheme gruvbox";
+      }
+      {
+        plugin = telescope-nvim;
+        type = "lua";
+        config = ''
+          ${builtins.readFile ./config/plugin/telescope.lua}
+        '';
+      }
+      {
+        plugin = telescope-fzf-native-nvim;
+      }
+      {
+        plugin = nvim-treesitter.withPlugins (p: [
+          p.tree-sitter-nix
+          p.tree-sitter-vim
+          p.tree-sitter-bash
+          p.tree-sitter-lua
+          p.tree-sitter-python
+          p.tree-sitter-javascript
+          p.tree-sitter-typescript
+          p.tree-sitter-go
+          p.tree-sitter-rust
+          p.tree-sitter-html
+          p.tree-sitter-css
+          p.tree-sitter-tsx
+          p.tree-sitter-toml
+          p.tree-sitter-yaml
+          p.tree-sitter-json
+        ]);
+        type = "lua";
+        config = ''
+          ${builtins.readFile ./config/plugin/treesitter.lua}
+        '';
+      }
+      {
+        plugin = lualine-nvim;
+        type = "lua";
+        config = ''
+          ${builtins.readFile ./config/plugin/lualine.lua}
+        '';
+      }
+      {
+        plugin = lspkind-nvim;
+      }
+      {
+        plugin = neo-tree-nvim;
+      }
+      {
+        plugin = nvim-web-devicons;
+      }
+    ];
 
-  # programs.neovim = {
-  #   enable = true;
-  #   withNodeJs = true;
-  #   withPython3 = true;
-  #   viAlias = true;
-  #   vimAlias = true;
-  #   # extraConfig = 
-  #   # ''
-  #   #   set expandtab
-  #   # '';
-  #   # plugins = with pkgs.vimPlugins; [
-  #   #   telescope-nvim
-  #   #   # telescope-recent-files
-  #   # ];
-  # };
+    extraPackages = with pkgs; [
+      xclip
+      wl-clipboard
+      luajitPackages.lua-lsp
+    ];
+  };
 }
