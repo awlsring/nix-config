@@ -116,7 +116,7 @@ in {
     source "$HOME/.local/share/zsh/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#${config.colorScheme.colors.base03}"
-    bindkey '\t' autosuggest-accept
+    bindkey '^ ' autosuggest-accept
 
     [ -f "$HOME/.local/share/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \
     source "$HOME/.local/share/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"

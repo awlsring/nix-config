@@ -113,6 +113,8 @@ in {
           "$mainMod SHIFT, k, movewindow, u"
           "$mainMod SHIFT, j, movewindow, d"
 
+          "$mainMod, Y, layoutmsg, orientationtop"
+
           # Scroll through existing workspaces with mainMod + scroll
           "bind = $mainMod, mouse_down, workspace, e+1"
           "bind = $mainMod, mouse_up, workspace, e-1"

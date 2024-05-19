@@ -4,11 +4,7 @@
   lib,
   ...
 }: {
-  imports = [
-    # ./lsp.nix
-    # ./syntax.nix
-    # ./ui.nix
-  ];
+  imports = [];
 
   programs.neovim = let
   in {
@@ -81,9 +77,24 @@
       {
         plugin = nvim-web-devicons;
       }
+      {
+        plugin = nvim-lspconfig;
+        type = "lua";
+        config = ''
+          ${builtins.readFile ./config/plugin/lsp.lua}
+        '';
+      }
     ];
 
     extraPackages = with pkgs; [
+      gopls
+      golangci-lint
+      golangci-lint-langserver
+      rust-analyzer
+      dockerfile-language-server-nodejs
+      pyright
+      nodePackages.typescript-language-server
+      lua-language-server
       xclip
       wl-clipboard
       luajitPackages.lua-lsp
