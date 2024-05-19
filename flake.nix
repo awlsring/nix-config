@@ -10,7 +10,11 @@
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Nix Colors
     nix-colors.url = "github:misterio77/nix-colors";
+
+    # Stylix
+    stylix.url = "github:danth/stylix";
 
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";

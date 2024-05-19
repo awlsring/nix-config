@@ -39,6 +39,16 @@
         plugin = telescope-fzf-native-nvim;
       }
       {
+        plugin = telescope-ui-select-nvim;
+      }
+      {
+        plugin = none-ls-nvim;
+        type = "lua";
+        config = ''
+          ${builtins.readFile ./config/plugin/null-ls.lua}
+        '';
+      }
+      {
         plugin = nvim-treesitter.withPlugins (p: [
           p.tree-sitter-nix
           p.tree-sitter-vim
@@ -84,17 +94,93 @@
           ${builtins.readFile ./config/plugin/lsp.lua}
         '';
       }
+
+      # Completions
+      {
+        plugin = nvim-cmp;
+        type = "lua";
+        config = ''
+          ${builtins.readFile ./config/plugin/cmp.lua}
+        '';
+      }
+      ## Snippets
+      {
+        plugin = luasnip;
+      }
+      {
+        plugin = cmp_luasnip;
+      }
+      {
+        plugin = friendly-snippets;
+      }
+      ## LSP
+      {
+        plugin = cmp-nvim-lsp;
+      }
+      ## LLM
+      {
+        plugin = copilot-vim;
+      }
+
+      # AutoSession
+      {
+        plugin = auto-session;
+        type = "lua";
+        config = ''
+          ${builtins.readFile ./config/plugin/auto-session.lua}
+        '';
+      }
+
+      # Git
+      {
+        plugin = gitsigns-nvim;
+        type = "lua";
+        config = ''
+          ${builtins.readFile ./config/plugin/git.lua}
+        '';
+      }
+      {
+        plugin = vim-fugitive;
+      }
+
+      # Dashboard
+      {
+        plugin = alpha-nvim;
+        type = "lua";
+        config = ''
+          ${builtins.readFile ./config/plugin/alpha.lua}
+        '';
+      }
     ];
 
     extraPackages = with pkgs; [
+      # LSP deps
       gopls
-      golangci-lint
       golangci-lint-langserver
       rust-analyzer
       dockerfile-language-server-nodejs
       pyright
       nodePackages.typescript-language-server
       lua-language-server
+
+      # Formatters
+      stylua
+      black
+      codespell
+      goimports-reviser
+      prettierd
+      shfmt
+      rustfmt
+
+      # Diagnostics
+      shellcheck
+      golangci-lint
+      pylint
+      go-tools
+      yamllint
+      eslint_d
+
+      # Others
       xclip
       wl-clipboard
       luajitPackages.lua-lsp

@@ -9,3 +9,4 @@ vim.g.mapleader = " " -- set leader to space
 vim.keymap.set('n', '<C-p>', ':Telescope find_files<CR>')
 vim.keymap.set('n', '<leader>fg', ':Telescope live_grep<CR>')
 vim.keymap.set('n', '<C-n>', ':Neotree filesystem reveal left<CR>')
+vim.keymap.set('n', '<CR>', 'i')

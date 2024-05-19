@@ -1,21 +1,27 @@
--- Get info on hover or Shift+K
-vim.o.updatetime = 1000
-vim.cmd([[
-augroup LspHover
-    autocmd!
-    autocmd CursorHold * lua vim.lsp.buf.hover()
-augroup END
-]])
-vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr })
-
--- Go
+-- Config
 local lspConfig = require('lspconfig')
-lspConfig.gopls.setup{}
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-lspConfig.golangci_lint_ls.setup{}
+---- Go
+lspConfig.gopls.setup({
+    capabilities = capabilities,
+    settings = {
+        gopls = {
+            analyses = {
+                unusedparams = true,
+            },
+            staticcheck = true,
+        },
+    },
+})
 
--- Rust
-lspConfig.rust_analyzer.setup{
+lspConfig.golangci_lint_ls.setup({
+    capabilities = capabilities,
+})
+
+---- Rust
+lspConfig.rust_analyzer.setup({
+    capabilities = capabilities,
     settings = {
         ['rust-analyzer'] = {
         diagnostics = {
@@ -23,19 +29,33 @@ lspConfig.rust_analyzer.setup{
         }
         }
     }
-}
+})
 
--- Python
-lspConfig.pyright.setup{}
+---- Python
+lspConfig.pyright.setup({
+    capabilities = capabilities,
+})
 
--- TypeScript
-lspConfig.tsserver.setup{}
+---- TypeScript
+lspConfig.tsserver.setup({
+    capabilities = capabilities,
+})
 
--- Lua
-lspConfig.lua_ls.setup{}
+---- Lua
+lspConfig.lua_ls.setup({
+    capabilities = capabilities,
+})
 
--- Docker
-lspConfig.dockerls.setup{}
+---- Docker
+lspConfig.dockerls.setup({
+    capabilities = capabilities,
+})
 
--- Smithy
+-- ---- Smithy
 -- lspConfig.smithy_ls.setup{}
+
+-- Key Bindings
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, { })
+vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, { })
+vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, { })
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { })
