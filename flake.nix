@@ -29,7 +29,7 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -39,18 +39,9 @@
     home-manager,
     nix-darwin,
     systems,
+    stylix,
     ...
   } @ inputs: let
-    # inherit (self) outputs;
-    # lib = nixpkgs.lib // home-manager.lib;
-    # systems = [
-    #   "x86_64-linux"
-    #   "aarch64-linux"
-    #   "aarch64-darwin"
-    # ];
-    # forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f {
-    #   pkgs = import nixpkgs { inherit system; };
-    # });
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
     forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
@@ -111,20 +102,20 @@
     homeConfigurations = {
       "awlsring@chad" = lib.homeManagerConfiguration {
         modules = [./home-manager/darwin];
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+        pkgs = pkgsFor.aarch64-darwin;
         extraSpecialArgs = {
           inherit inputs outputs;
         };
       };
       "awlsring@toes" = lib.homeManagerConfiguration {
         modules = [./home-manager/linux];
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {
           inherit inputs outputs;
         };
       };
       "awlsring@chungus" = lib.homeManagerConfiguration {
-        modules = [./home-manager/linux];
+        modules = [stylix.homeManagerModules.stylix ./home-manager/linux];
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {
           inherit inputs outputs;
@@ -132,7 +123,7 @@
       };
       "awlsring@naya" = lib.homeManagerConfiguration {
         modules = [./home-manager/linux];
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {
           inherit inputs outputs;
         };

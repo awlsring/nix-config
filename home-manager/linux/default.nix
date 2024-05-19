@@ -17,7 +17,7 @@
     ../neovim
     ../terminal.nix
     ../zsh.nix
-    ../hyprland.nix
+    ../desktop-environments/hyprland
   ];
 
   home = {
