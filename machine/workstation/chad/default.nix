@@ -1,5 +1,4 @@
-{ pkgs, nix-darwin, ...}:
-{
+{ pkgs, nix-darwin, ...}: {
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
   nix = {
@@ -9,8 +8,9 @@
     };
   };
 
-  services.yabai.enable = true;
-  services.yabai.package = pkgs.yabai;
+  yabai-de = {
+    enable = true;
+  };
 
   programs = {
     gnupg.agent.enable = true;
@@ -18,9 +18,9 @@
   };
 
   fonts.fontDir.enable = true;
-  fonts.fonts = [
-    pkgs.atkinson-hyperlegible
-    pkgs.jetbrains-mono
+  fonts.fonts = with pkgs; [
+    atkinson-hyperlegible
+    jetbrains-mono
   ];
 
   system.stateVersion = 4;
@@ -43,25 +43,5 @@
       "slack"
       "spotify"
     ];
-  };
-
-  system.defaults = {
-    dock = {
-      autohide = false;
-      orientation = "bottom";
-      show-process-indicators = true;
-      show-recents = false;
-      static-only = true;
-    };
-    finder = {
-      AppleShowAllExtensions = true;
-      ShowPathbar = true;
-      FXEnableExtensionChangeWarning = false;
-    };
-    NSGlobalDomain = {
-      AppleKeyboardUIMode = 3;
-      "com.apple.keyboard.fnState" = true;
-      NSAutomaticWindowAnimationsEnabled = false;
-    };
   };
 }
