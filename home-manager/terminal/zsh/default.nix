@@ -5,9 +5,16 @@
   ...
 }:
 {
+  imports = [
+    ./fastfetch.nix
+    ./integration.nix
+    ./terminal.nix
+  ];
+
   home.packages = with pkgs; [
     zsh-powerlevel10k
   ];
+
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
@@ -22,12 +29,17 @@
       grep = "grep --color=auto";
       q = "exit";
       ":q" = "exit";
+      mkdir = "mkdir -p";
       kb = "${pkgs.kubectl}/bin/kubectl";
       kba = "${pkgs.kubectl}/bin/kubectl apply -f";
       kbd = "${pkgs.kubectl}/bin/kubectl delete -f";
       kbg = "${pkgs.kubectl}/bin/kubectl get all";
       cat = "${pkgs.bat}/bin/bat";
     };
+    initExtra = ''
+      ${builtins.readFile ./themes/p10k.zsh}
+      ${pkgs.fastfetch}/bin/fastfetch
+    '';
     zplug = {
       enable = true;
       plugins = [

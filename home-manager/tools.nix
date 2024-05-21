@@ -22,6 +22,13 @@
     kitty
     alejandra
     tmux
+    yazi
+    starship
+    eza
+
+    # kubernetes
+    kubectl
+    k9s
   ];
 
   # Enable home-manager and git

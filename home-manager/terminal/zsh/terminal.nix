@@ -13,5 +13,11 @@
       listen_on = "unix:/tmp/kitty";
       shell_integration = "enabled";
     };
+    theme = "Catppuccin-Mocha";
+    font = {
+      name = "JetBrains Mono Bold";
+      package = pkgs.jetbrains-mono;
+      size = 14;
+    };
   };
 }

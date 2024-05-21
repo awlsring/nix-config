@@ -11,6 +11,8 @@
   imports = [
     ../common.nix
     ../tools.nix
+    ../terminal/zsh
+    ../neovim
   ];
 
   home = {

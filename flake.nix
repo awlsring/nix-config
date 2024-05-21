@@ -20,7 +20,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
 
     # Nix Systems
-    systems.url = "github:nix-systems/default-linux";
+    systems.url = "github:nix-systems/default";
 
     # Sops
     sops-nix.url = "github:Mic92/sops-nix";
@@ -91,11 +91,18 @@
     # MacBook
     darwinConfigurations = {
       chad = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
         specialArgs = {inherit inputs outputs;};
         modules = [
+          ./modules/darwin
           ./machine/workstation/chad
+          home-manager.darwinModules.home-manager {
+            home-manager.extraSpecialArgs = {
+              inherit inputs outputs;
+            };
+            home-manager.users.awlsring = import ./home-manager/darwin;
+          }
         ];
-        system = "aarch64-darwin";
       };
     };
 

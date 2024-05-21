@@ -91,7 +91,7 @@ in {
           "$mainMod, bracketleft, changegroupactive, b"
           "$mainMod, bracketright, changegroupactive, f"
           "$mainMod, O, exec, wofi --show drun"
-          "$mainMod, S, exec, rofi -show drun -show-icons"
+          "$mainMod, SPACE, exec, rofi -show drun -show-icons"
           "$mainMod, P, pin, active"
 
           "$mainMod, left, movefocus, l"
@@ -109,7 +109,8 @@ in {
           "$mainMod SHIFT, k, movewindow, u"
           "$mainMod SHIFT, j, movewindow, d"
 
-          "$mainMod, Y, layoutmsg, orientationtop"
+          # Add cycling through rotations
+          "$mainMod, r, layoutmsg, orientationtop"
 
           # Scroll through existing workspaces with mainMod + scroll
           "bind = $mainMod, mouse_down, workspace, e+1"

@@ -25,10 +25,6 @@
         config = "require(\"Comment\").setup()";
       }
       {
-        plugin = gruvbox-nvim;
-        config = "colorscheme gruvbox";
-      }
-      {
         plugin = telescope-nvim;
         type = "lua";
         config = ''
