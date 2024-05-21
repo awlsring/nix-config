@@ -5,7 +5,7 @@
     services.yabai.package = pkgs.yabai;
     services.yabai.enableScriptingAddition = true;
     services.yabai.extraConfig = ''
-      ${builtins.readFile ./config/.yabairc}
+      ${builtins.readFile ./config/yabairc}
     '';
   };
 }

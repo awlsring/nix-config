@@ -7,6 +7,8 @@ alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
 alt - l : yabai -m window --focus east
 
+# create space
+
 # Moving windows
 shift + alt - h : yabai -m window --warp west
 shift + alt - j : yabai -m window --warp south
