@@ -58,7 +58,7 @@
         }
         {
           type = "cpuusage";
-          key = "cpu usage%";
+          key = "cpu usage";
           format = "{1}";
         }
         {
