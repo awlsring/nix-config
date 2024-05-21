@@ -37,7 +37,10 @@
       cat = "${pkgs.bat}/bin/bat";
     };
     initExtra = ''
+      # Load theme
       ${builtins.readFile ./themes/p10k.zsh}
+
+      # Run fastfetch cause its cool
       ${pkgs.fastfetch}/bin/fastfetch
     '';
     zplug = {

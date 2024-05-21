@@ -1,5 +1,4 @@
-# Custom packages, that can be defined similarly to ones from nixpkgs
-# You can build them using 'nix build .#example'
-pkgs: {
-  # example = pkgs.callPackage ./example { };
+{pkgs ? import <nixpkgs> {}, ...}: rec {
+  # Nix scripts
+  nix-rebuild = pkgs.callPackage ./nix-rebuild {};
 }

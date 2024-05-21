@@ -29,6 +29,9 @@
     # kubernetes
     kubectl
     k9s
+
+    # nix utils
+    nix-rebuild
   ];
 
   # Enable home-manager and git
