@@ -61,79 +61,57 @@
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild switch --flake .#machine'
-    nixosConfigurations = {
-      # Workstation - Toes
-      toes = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./machine/workstation/toes
-          ./modules
-        ];
-      };
-      # Workstation - Chungus
-      chungus = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./machine/workstation/chungus
-          ./modules
-        ];
-      };
-      # Garage Storage - Naya
-      naya = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./machine/garage/naya
-          ./modules
-        ];
+    # nixosConfigurations = {
+    #   # Workstation - Toes
+    #   toes = nixpkgs.lib.nixosSystem {
+    #     specialArgs = {inherit inputs outputs;};
+    #     modules = [
+    #       ./machine/workstation/toes
+    #       ./modules
+    #     ];
+    #   };
+    #   # Workstation - Chungus
+    #   chungus = nixpkgs.lib.nixosSystem {
+    #     specialArgs = {inherit inputs outputs;};
+    #     modules = [
+    #       ./machine/workstation/chungus
+    #       ./modules
+    #     ];
+    #   };
+    #   # Garage Storage - Naya
+    #   naya = nixpkgs.lib.nixosSystem {
+    #     specialArgs = {inherit inputs outputs;};
+    #     modules = [
+    #       ./machine/garage/naya
+    #       ./modules
+    #     ];
+    #   };
+    # };
+
+    # Linux (non-NixOS)
+    homeConfigurations = let 
+      hostType = "linux";
+    in {
+      roach = lib.homeManagerConfiguration {
+        pkgs = pkgsFor.x86_64-linux;
+        extraSpecialArgs = { username="rawmatth"; inherit inputs outputs hostType home-manager stylix; };
+        modules = [ ./machines/workstations/roach ];
       };
     };
 
-    # MacBook
-    darwinConfigurations = {
+    # Macs (Darwin)
+    darwinConfigurations = let
+     hostType = "darwin";
+    in {
       chad = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./modules/darwin
-          ./machine/workstation/chad
-          home-manager.darwinModules.home-manager {
-            home-manager.extraSpecialArgs = {
-              inherit inputs outputs;
-            };
-            home-manager.users.awlsring = import ./home-manager/darwin;
-          }
-        ];
+        specialArgs = { username="awlsring"; inherit inputs outputs hostType home-manager stylix;};
+        modules = [ ./machines/workstations/chad ];
       };
-    };
-
-    homeConfigurations = {
-      "awlsring@chad" = lib.homeManagerConfiguration {
-        modules = [./home-manager/darwin];
-        pkgs = pkgsFor.aarch64-darwin;
-        extraSpecialArgs = {
-          inherit inputs outputs;
-        };
-      };
-      "awlsring@toes" = lib.homeManagerConfiguration {
-        modules = [./home-manager/linux];
-        pkgs = pkgsFor.x86_64-linux;
-        extraSpecialArgs = {
-          inherit inputs outputs;
-        };
-      };
-      "awlsring@chungus" = lib.homeManagerConfiguration {
-        modules = [stylix.homeManagerModules.stylix ./home-manager/linux];
-        pkgs = pkgsFor.x86_64-linux;
-        extraSpecialArgs = {
-          inherit inputs outputs;
-        };
-      };
-      "awlsring@naya" = lib.homeManagerConfiguration {
-        modules = [./home-manager/linux];
-        pkgs = pkgsFor.x86_64-linux;
-        extraSpecialArgs = {
-          inherit inputs outputs;
-        };
+      peccy = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = { username="rawmatth"; inherit inputs outputs hostType home-manager stylix;};
+        modules = [ ./machines/workstations/peccy ];
       };
     };
   };
