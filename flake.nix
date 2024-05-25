@@ -38,6 +38,7 @@
     nixpkgs,
     home-manager,
     nix-darwin,
+    sops-nix,
     systems,
     stylix,
     ...
@@ -105,7 +106,7 @@
     in {
       chad = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        specialArgs = { username="awlsring"; inherit inputs outputs hostType home-manager stylix;};
+        specialArgs = { username="awlsring"; inherit inputs outputs hostType home-manager stylix sops-nix;};
         modules = [ ./machines/workstations/chad ];
       };
       peccy = nix-darwin.lib.darwinSystem {

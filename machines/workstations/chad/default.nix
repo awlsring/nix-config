@@ -11,6 +11,8 @@
     enable = true;
   };
 
+  tailscale.enable = true;
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;

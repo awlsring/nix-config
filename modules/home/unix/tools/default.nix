@@ -19,6 +19,7 @@
     _1password
     alejandra
     tmux
+    sops
 
     # kubernetes
     kubectl

@@ -1,7 +1,9 @@
 { username, config, lib, pkgs, stylix, ... }: {
   imports = [ 
     ./wm 
+    ./services
     stylix.darwinModules.stylix
+    # sops-nix.darwinModules.sops # not officially supported, one a dev branch https://github.com/truelecter/sops-nix/blob/darwin-upstream/modules/darwin/default.nix
   ];
 
   environment = {
@@ -16,6 +18,11 @@
       ln -sv ${pkgs.path} $out/nixpkgs
     '';
   };
+
+  # secrets
+  # sops.defaultSopsFile = ../../../secrets/secrets.yaml;
+  # sops.defaultSopsFormat = "yaml";
+  # sops.age.keyFile = "/Users/${username}/.config/sops/age/keys.txt";
 
   homebrew = {
     enable = true;
