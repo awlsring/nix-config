@@ -6,12 +6,4 @@
   pkgs,
   ...
 }:
-{
-  home.packages = with pkgs; [
-    discord
-    slack
-    obsidian
-    spotify
-    _1password-gui
-  ];
-}
+{ }

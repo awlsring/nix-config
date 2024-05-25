@@ -7,11 +7,9 @@
 
   networking.hostName = "chad";
 
-  yabai-de = {
-    enable = true;
-  };
-
+  yabai-de.enable = true;
   tailscale.enable = true;
+  apps.enable = true;
 
   home-manager = {
     useGlobalPkgs = true;
