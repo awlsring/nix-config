@@ -15,7 +15,7 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit inputs outputs username hostType stylix;};
-    users.${username} = import ../../../modules/home;
+    users.${username} = import ./home.nix;
   };
 }
 

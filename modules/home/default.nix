@@ -15,7 +15,7 @@
     ( 
       if hostType == "nixos" || hostType == "linux" then ./linux 
       else if hostType == "darwin" then ./darwin
-      else {}
+      else throw "Unsupported host type: ${hostType}"
     )
   ];
 

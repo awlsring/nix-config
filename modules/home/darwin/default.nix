@@ -1,6 +1,6 @@
 { config, lib, pkgs, username, ... }: {
   home = {
     username = username;
-    homeDirectory = "/Users/awlsring";
+    homeDirectory = "/Users/${username}";
   };
 }

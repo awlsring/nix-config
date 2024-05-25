@@ -1,7 +1,7 @@
-{ config, pkgs, libs, ... }: {
+{ config, pkgs, lib, ... }: {
 
   options.apps = {
-    enable = lib.mkEnableOption "enables tailscale";
+    enable = lib.mkEnableOption "enables desktop applications";
   };
 
   config = lib.mkIf config.apps.enable {
@@ -13,5 +13,5 @@
       "obsidian"
       "1password"
     ];
-  }
+  };
 }
