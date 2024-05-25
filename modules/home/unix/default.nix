@@ -6,6 +6,5 @@
     ./tools
     ./apps
     ./lazygit
-    ./wallpaper
   ];
 }

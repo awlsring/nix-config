@@ -22,7 +22,7 @@
 
   # Stylix config
   stylix = lib.mkIf (wallpaper != null) {
-    image = ../../wallpapers/deer-sunset.jpg;
+    image = wallpaper;
     polarity = "dark";
     fonts = {
       monospace = {

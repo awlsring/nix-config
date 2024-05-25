@@ -1,10 +1,19 @@
-{ home-manager, inputs, outputs, lib, config, pkgs, hostType, stylix, username, ...}:
-let
- wallpaper = ../../../wallpapers/deer-sunset.jpg;
-in
 {
+  home-manager,
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  hostType,
+  stylix,
+  username,
+  ...
+}: let
+  wallpaper = ../../../wallpapers/shaded_landscape.jpg;
+in {
   imports = [
-    ../../../modules/system 
+    ../../../modules/system
     home-manager.darwinModules.home-manager
   ];
 
@@ -18,9 +27,7 @@ in
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs outputs username wallpaper hostType stylix;};
+    extraSpecialArgs = {inherit inputs outputs username wallpaper hostType stylix;};
     users.${username} = import ./home.nix;
   };
 }
-
-
