@@ -121,15 +121,6 @@
           plugin = copilot-vim;
         }
 
-        # AutoSession
-        {
-          plugin = auto-session;
-          type = "lua";
-          config = ''
-            ${builtins.readFile ./config/plugin/auto-session.lua}
-          '';
-        }
-
         # Git
         {
           plugin = gitsigns-nvim;
