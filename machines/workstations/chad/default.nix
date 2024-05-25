@@ -10,6 +10,7 @@
   yabai-de.enable = true;
   tailscale.enable = true;
   apps.enable = true;
+  desktop.wallpaper = ../../../wallpapers/deer-sunset.jpg;
 
   home-manager = {
     useGlobalPkgs = true;
