@@ -1,4 +1,4 @@
-{ pkgs, outputs, hostType, username, stylix, ... }: {
+{ config, lib, pkgs, outputs, hostType, username, stylix, ... }: {
   imports = [
     ./unix
     (
@@ -48,8 +48,8 @@
 
   # services.tailscale.enable = true;
 
-  stylix = {
-    image = ../../wallpapers/deer-sunset.jpg;
+  stylix = lib.mkIf (config.desktop.wallpaper != null) {
+    image = config.desktop.wallpaper;
     polarity = "dark";
     fonts = {
       monospace = {

@@ -6,6 +6,7 @@
   pkgs,
   hostType,
   stylix,
+  wallpaper,
   ... 
 }: {
   imports = [
@@ -20,7 +21,7 @@
   ];
 
   # Stylix config
-  stylix = {
+  stylix = lib.mkIf (wallpaper != null) {
     image = ../../wallpapers/deer-sunset.jpg;
     polarity = "dark";
     fonts = {
