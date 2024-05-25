@@ -5,5 +5,6 @@
     ./terminal/zsh
     ./tools
     ./apps
+    ./lazygit
   ];
 }
