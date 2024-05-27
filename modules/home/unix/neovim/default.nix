@@ -64,6 +64,7 @@
             p.tree-sitter-toml
             p.tree-sitter-yaml
             p.tree-sitter-json
+            p.tree-sitter-templ
           ]);
           type = "lua";
           config = ''
