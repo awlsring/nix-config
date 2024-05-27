@@ -1,9 +1,20 @@
-{ config, lib, pkgs, outputs, hostType, username, stylix, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  outputs,
+  hostType,
+  username,
+  stylix,
+  ...
+}: {
   imports = [
     ./unix
     (
-      if hostType == "nixos" then ./linux
-      else if hostType == "darwin" then ./darwin
+      if hostType == "nixos"
+      then ./linux
+      else if hostType == "darwin"
+      then ./darwin
       else {}
     )
   ];
@@ -23,12 +34,12 @@
   nix = {
     package = pkgs.nix;
     settings = {
-      "extra-experimental-features" = [ "nix-command" "flakes" ];
+      "extra-experimental-features" = ["nix-command" "flakes"];
     };
   };
 
   environment = {
-    shells = with pkgs; [ zsh ];
+    shells = with pkgs; [zsh];
     systemPackages = with pkgs; [
       git
     ];
@@ -40,6 +51,13 @@
       atkinson-hyperlegible
       jetbrains-mono
     ];
+    fontconfig = {
+      defaultFonts = {
+        monospace = ["JetBrainsMono Nerd Font Mono"];
+        sansSerif = ["JetBrainsMono Nerd Font Mono"];
+        serif = ["JetBrainsMono Nerd Font Mono"];
+      };
+    };
   };
 
   programs = {
@@ -53,7 +71,7 @@
     polarity = "dark";
     fonts = {
       monospace = {
-        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
         name = "JetBrainsMono Nerd Font Mono";
       };
       sansSerif = {

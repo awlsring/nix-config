@@ -1,6 +1,6 @@
-{ ... }: {
-  imports = [ 
-    ./garage
-    ./tailscale
+{...}: {
+  imports = [
+    ./garage.nix
+    ./tailscale.nix
   ];
 }

@@ -1,6 +1,6 @@
-{ ... }: {
-  imports = [ 
-    ./node-exporter
-    ./scrutiny-collector
+{...}: {
+  imports = [
+    ./node-exporter.nix
+    ./scrutiny-collector.nix
   ];
 }

@@ -5,56 +5,39 @@
   lib,
   config,
   pkgs,
+  home-manager,
+  hostType,
+  stylix,
+  username,
   ...
-}: {
+}: let
+  wallpaper = ../../../wallpapers/shaded_landscape.jpg;
+in {
   imports = [
-    inputs.vscode-server.nixosModules.default
+    ../../../modules/system
     ./hardware-configuration.nix
-    ../../common/sops.nix
+    home-manager.nixosModules.home-manager
   ];
 
+  # TODO: move these
   environment.systemPackages = with pkgs; [
     git
     mangohud
     protonup
   ];
 
-  nixpkgs = {
-    overlays = [
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.stable
-    ];
-    config = {
-      allowUnfree = true;
-    };
-  };
-
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    settings = {
-      experimental-features = "nix-command flakes";
-      flake-registry = "";
-    };
-    channel.enable = false;
-
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-  };
-
   # tailscale.enable = true;
-  services.vscode-server.enable = true;
+  # services.vscode-server.enable = true;
 
   networking.hostName = "chungus";
   networking.networkmanager.enable = true;
-
+  desktop.wallpaper = wallpaper;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   users.users = {
-    awlsring = {
-      home = "/home/awlsring";
+    ${username} = {
+      home = "/home/${username}";
       shell = pkgs.zsh;
       createHome = true;
       isNormalUser = true;
@@ -64,6 +47,13 @@
       ];
       extraGroups = ["docker" "networkmanager" "wheel" "audio"];
     };
+  };
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = {inherit inputs outputs username wallpaper hostType stylix;};
+    users.${username} = import ./home.nix;
   };
 
   sound.enable = false;
@@ -164,19 +154,19 @@
     };
   };
 
-  fonts.packages = with pkgs; [
-    (pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "Iosevka" "FiraCode"];})
-    cm_unicode
-  ];
+  # fonts.packages = with pkgs; [
+  #   (pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "Iosevka" "FiraCode"];})
+  #   cm_unicode
+  # ];
 
-  fonts.enableDefaultPackages = true;
-  fonts.fontconfig = {
-    defaultFonts = {
-      monospace = ["JetBrainsMono Nerd Font Mono"];
-      sansSerif = ["JetBrainsMono Nerd Font"];
-      serif = ["JetBrainsMono Nerd Font"];
-    };
-  };
+  # fonts.enableDefaultPackages = true;
+  # fonts.fontconfig = {
+  #   defaultFonts = {
+  #     monospace = ["JetBrainsMono Nerd Font Mono"];
+  #     sansSerif = ["JetBrainsMono Nerd Font"];
+  #     serif = ["JetBrainsMono Nerd Font"];
+  #   };
+  # };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

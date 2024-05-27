@@ -1,6 +1,13 @@
-{ username, config, lib, pkgs, stylix, ... }: {
-  imports = [ 
-    ./wm 
+{
+  username,
+  config,
+  lib,
+  pkgs,
+  stylix,
+  ...
+}: {
+  imports = [
+    ./wm
     ./services
     ./system
     ./apps
@@ -33,7 +40,7 @@
       autoUpdate = true;
       upgrade = true;
     };
-    brews = [ "git" ];
+    brews = ["git"];
   };
 
   users.users.${username} = {
@@ -56,9 +63,9 @@
     defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
     includeUninstaller = false;
     defaults.finder = {
-        AppleShowAllExtensions = true;
-        ShowPathbar = true;
-        FXEnableExtensionChangeWarning = false;
+      AppleShowAllExtensions = true;
+      ShowPathbar = true;
+      FXEnableExtensionChangeWarning = false;
     };
     activationScripts.postUserActivation.text = lib.mkAfter ''
       # apply system configs without reboot

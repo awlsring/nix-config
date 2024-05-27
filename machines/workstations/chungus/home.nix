@@ -11,6 +11,12 @@
     ../../../modules/home
   ];
 
+  # linux modules
+  apps.enable = true;
+  gaming.enable = true;
+  hyprland.enable = true;
+
+  # unix modules
   tools.enable = true;
   zsh.enable = true;
   neovim.enable = true;
