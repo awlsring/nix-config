@@ -60,6 +60,10 @@ in {
           kb_variant = "";
           kb_model = "";
 
+          kb_options = [
+            "ctrl:nocaps"
+          ];
+
           follow_mouse = 1;
 
           touchpad = {

@@ -6,7 +6,8 @@
     inputs.sops-nix.nixosModules.sops
   ];
 
-  fontconfig = {
+  # System Fonts
+  fonts.fontconfig = {
     defaultFonts = {
       monospace = ["JetBrainsMono Nerd Font Mono"];
       sansSerif = ["JetBrainsMono Nerd Font Mono"];
