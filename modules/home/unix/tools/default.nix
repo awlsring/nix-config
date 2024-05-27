@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }: {
-  
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   options = {
     tools = {
       enable = lib.mkEnableOption "enables tools";
@@ -10,7 +14,7 @@
     programs = {
       bat = {
         enable = true;
-        extraPackages = with pkgs.bat-extras; [ batman ];
+        extraPackages = with pkgs.bat-extras; [batman];
       };
       git.enable = true;
       gpg.enable = true;
@@ -29,6 +33,8 @@
       alejandra
       tmux
       sops
+      gh
+      glow
 
       # kubernetes
       kubectl
