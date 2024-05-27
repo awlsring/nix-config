@@ -14,6 +14,9 @@
       package = pkgs.tmux;
       mouse = true;
       clock24 = true;
+      keyMode = "vi";
+      sensibleOnTop = false;
+      tmuxinator.enable = true;
       plugins = with pkgs.tmuxPlugins; [
         {
           plugin = vim-tmux-navigator;
@@ -41,10 +44,10 @@
       ];
       extraConfig = ''
         unbind r
-        bind r source-file ~/.config/tmux/.tmux.conf \; display-message "Reloaded tmux.conf"
+        bind r source-file ~/.config/tmux/tmux.conf \; display-message "Reloaded tmux.conf"
 
-        # Set the prefix to C-s
         set -g prefix C-s
+        set -sg escape-time 1
 
         set-option -g status-position top
 
@@ -52,6 +55,11 @@
         bind-key j select-pane -D
         bind-key k select-pane -U
         bind-key l select-pane -R
+
+        unbind [
+        unbind ]
+        bind-key [ split-window -v
+        bind-key ] split-window -h
       '';
     };
   };
