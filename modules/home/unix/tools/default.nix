@@ -16,6 +16,10 @@
         enable = true;
         extraPackages = with pkgs.bat-extras; [batman];
       };
+      bottom = {
+        enable = true;
+        package = pkgs.bottom;
+      };
       git.enable = true;
       gpg.enable = true;
     };
@@ -23,7 +27,6 @@
     home.packages = with pkgs; [
       # utils
       bc
-      bottom
       ripgrep
       fd
       httpie
