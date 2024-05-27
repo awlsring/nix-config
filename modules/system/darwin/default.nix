@@ -59,6 +59,9 @@
   };
 
   system = {
+    keyboard = {
+      remapCapsLockToControl = true;
+    };
     stateVersion = 4;
     defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
     includeUninstaller = false;

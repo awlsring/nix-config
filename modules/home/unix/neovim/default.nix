@@ -142,6 +142,28 @@
             ${builtins.readFile ./config/plugin/alpha.lua}
           '';
         }
+        # tmux
+        {
+          plugin = vim-tmux-navigator;
+          type = "lua";
+          config = ''
+            vim.keymap.set('n', '<C-h>', '<cmd>TmuxNavigateLeft<CR>', {})
+            vim.keymap.set('n', '<C-j>', '<Cmd>TmuxNavigateDown<CR>', {})
+            vim.keymap.set('n', '<C-k>', '<Cmd>TmuxNavigateUp<CR>', {})
+            vim.keymap.set('n', '<C-l>', '<Cmd>TmuxNavigateRight<CR>', {})
+          '';
+        }
+        # tests
+        {
+          plugin = vimux;
+        }
+        {
+          plugin = nvim-test;
+          type = "lua";
+          config = ''
+            ${builtins.readFile ./config/plugin/nvim-test.lua}
+          '';
+        }
       ];
 
       extraPackages = with pkgs; [
