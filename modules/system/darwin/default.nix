@@ -60,6 +60,7 @@
 
   system = {
     keyboard = {
+      enableKeyMapping = true;
       remapCapsLockToControl = true;
     };
     stateVersion = 4;
