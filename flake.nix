@@ -73,6 +73,7 @@
           ./modules
         ];
       };
+
       # Workstation - Chungus
       chungus = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -82,6 +83,17 @@
         };
         modules = [./machines/workstations/chungus];
       };
+
+      # K3S Node - Tarkir
+      tarkir = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          username = "k3s";
+          inherit inputs outputs hostType home-manager stylix sops-nix;
+        };
+        modules = [./machines/workstations/tarkir];
+      };
+
       # Garage Storage - Naya
       naya = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
