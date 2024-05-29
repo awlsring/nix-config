@@ -88,7 +88,7 @@
       tarkir = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          username = "awlsring";
+          username = "k3s";
           inherit inputs outputs hostType home-manager stylix sops-nix;
         };
         modules = [./machines/servers/k3s/tarkir];
