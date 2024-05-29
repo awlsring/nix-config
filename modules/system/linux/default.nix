@@ -10,6 +10,9 @@
     inputs.sops-nix.nixosModules.sops
   ];
 
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   security.sudo.extraRules = [
     {
       users = ["privileged_user"];
@@ -31,6 +34,13 @@
       ];
       extraGroups = ["wheel"];
     };
+  };
+
+  # Sops
+  sops = {
+    defaultSopsFile = ../../../secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
+    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
   };
 
   # SSH

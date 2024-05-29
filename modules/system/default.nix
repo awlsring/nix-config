@@ -59,6 +59,7 @@
 
   # services.tailscale.enable = true;
 
+  # This doesn't work if null???
   stylix = lib.mkIf (config.desktop.wallpaper != null) {
     image = config.desktop.wallpaper;
     polarity = "dark";

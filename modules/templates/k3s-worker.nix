@@ -3,6 +3,10 @@ let
   cfg = config.templates.k3s-worker;
 in 
 {
+  imports = [
+    ../system
+  ];
+
   options.templates.k3s-worker = {
     enable = lib.mkEnableOption "enables k3s-worker modules";
     hostname = lib.mkOption {
@@ -17,7 +21,7 @@ in
       type = lib.types.path;
       description = "path to file containing token";
     };
-  }
+  };
 
   config = lib.mkIf cfg.enable {
     
@@ -39,9 +43,9 @@ in
       enable = true;
       package = pkgs.k3s;
       role = "agent";
-      serverAddr = ${cfg.serverAddress}:6443;
+      serverAddr = "${cfg.serverAddress}:6443";
       tokenFile = cfg.tokenPath;
-      extraFlags = "--flannel-backend=none --disable-network-policy --node-ip=${config.networking.interfaces.eth0.ipv4.address}";
+      extraFlags = "--flannel-backend=none --disable-network-policy";
     };
     environment.systemPackages = [ pkgs.nfs-utils ];
     networking.firewall.allowedTCPPorts = [ 6443 ];
