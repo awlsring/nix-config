@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   options = {
     tailscale = {
       enable = lib.mkEnableOption "enables tailscale";
@@ -13,21 +17,21 @@
 
   config = lib.mkIf config.tailscale.enable {
     # make the tailscale command usable to users
-    environment.systemPackages = [ pkgs.tailscale ];
+    environment.systemPackages = [pkgs.tailscale];
 
     # enable the tailscale service
     services.tailscale.enable = true;
 
     # TODO: make secret name configurable
-    sops.secrets."tailscale/oauth/secret" = { };
+    sops.secrets."tailscale/oauth/secret" = {};
 
     systemd.services.tailscale-autoconnect = {
       description = "Automatic connection to Tailscale";
 
       # make sure tailscale is running before trying to connect to tailscale
-      after = [ "network-pre.target" "tailscale.service" ];
-      wants = [ "network-pre.target" "tailscale.service" ];
-      wantedBy = [ "multi-user.target" ];
+      after = ["network-pre.target" "tailscale.service"];
+      wants = ["network-pre.target" "tailscale.service"];
+      wantedBy = ["multi-user.target"];
 
       # set this service as a oneshot job
       serviceConfig.Type = "oneshot";
@@ -53,11 +57,10 @@
       enable = true;
 
       # always allow traffic from your Tailscale network
-      trustedInterfaces = [ "tailscale0" ];
+      trustedInterfaces = ["tailscale0"];
 
       # allow the Tailscale UDP port through the firewall
-      allowedUDPPorts = [ config.services.tailscale.port ];
+      allowedUDPPorts = [config.services.tailscale.port];
     };
   };
-
 }
