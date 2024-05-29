@@ -91,7 +91,7 @@
           username = "k3s";
           inherit inputs outputs hostType home-manager stylix sops-nix;
         };
-        modules = [./machines/workstations/tarkir];
+        modules = [./machines/servers/k3s/tarkir];
       };
 
       # Garage Storage - Naya
