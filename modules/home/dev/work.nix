@@ -31,5 +31,21 @@
         else if pkgs.stdenv.hostPlatform.isx86_64 then "AL2_x86_64"
         else null;
     };
+    file.".config/brazil/brazil.prefs" = {
+      text = ''
+        [cli "bin"]
+        java17_home = ${pkgs.jdk17}
+
+        ruby27 = ${pkgs.ruby}
+      '';
+    };
   };
+
+  home.packages = with pkgs; [
+    # java
+    jdk17
+
+    # ruby
+    ruby
+  ];
 }

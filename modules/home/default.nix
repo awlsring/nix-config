@@ -20,6 +20,18 @@
     )
   ];
 
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.stable
+    ];
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = _: true;
+    };
+  };
+
   # Stylix config
   stylix = lib.mkIf (wallpaper != null) {
     image = wallpaper;

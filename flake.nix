@@ -112,6 +112,7 @@
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {
           username = "rawmatth";
+          wallpaper = ./wallpapers/shaded_landscape.jpg; # todo make this work not being set
           inherit inputs outputs hostType home-manager stylix;
         };
         modules = [./machines/workstations/roach];
