@@ -47,6 +47,13 @@
 
         # Run fastfetch cause its cool
         ${pkgs.fastfetch}/bin/fastfetch
+
+        # kitty only alias
+        if [[ -n "$KITTY_PID" ]]; then
+          alias imgcat="kitty +kitten icat"
+          alias ssh="kitty +kitten ssh $@"
+          alias ssh-compat="TERM=xterm-256color \ssh"
+        fi
       '';
       zplug = {
         enable = true;
