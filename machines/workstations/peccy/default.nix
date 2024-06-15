@@ -1,22 +1,31 @@
-{ home-manager, inputs, outputs, lib, config, pkgs, hostType, stylix, username, ...}:
 {
+  home-manager,
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  hostType,
+  stylix,
+  username,
+  ...
+}: let
+  wallpaper = ../../../wallpapers/deer-sunset.jpg;
+in {
   imports = [
-    ../../../modules/system 
+    ../../../modules/system
     home-manager.darwinModules.home-manager
   ];
 
   networking.hostName = "peccy";
 
-  yabai-de = {
-    enable = true;
-  };
+  yabai-de.enable = true;
+  apps.enable = true;
+  desktop.wallpaper = wallpaper;
 
   home-manager = {
-    useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs outputs username hostType stylix;};
-    users.${username} = import ../../../modules/home;
+    extraSpecialArgs = {inherit inputs outputs username wallpaper hostType stylix;};
+    users.${username} = import ./home.nix;
   };
 }
-
-

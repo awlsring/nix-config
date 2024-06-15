@@ -135,7 +135,7 @@
         system = "aarch64-darwin";
         specialArgs = {
           username = "rawmatth";
-          inherit inputs outputs hostType home-manager stylix;
+          inherit inputs outputs hostType home-manager stylix sops-nix;
         };
         modules = [./machines/workstations/peccy];
       };

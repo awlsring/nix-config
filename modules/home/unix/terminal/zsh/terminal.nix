@@ -10,7 +10,7 @@
       shellIntegration.enableZshIntegration = true;
       settings = {
         confirm_os_window_close = "0";
-        background_opacity = lib.mkForce "0.6";
+        background_opacity = lib.mkForce "0.7";
         allow_remote_control = "yes";
         shell_integration = "enabled";
       };
