@@ -25,7 +25,6 @@ in {
   desktop.wallpaper = wallpaper;
 
   home-manager = {
-    useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = {inherit inputs outputs username wallpaper hostType stylix;};
     users.${username} = import ./home.nix;
