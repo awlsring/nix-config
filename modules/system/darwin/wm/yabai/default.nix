@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }: 
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./yabai.nix
     ./skhd.nix
@@ -14,10 +18,9 @@
   };
 
   config = lib.mkIf config."yabai-de".enable {
-    fonts.fonts = with pkgs; [
+    fonts.packages = with pkgs; [
       sketchybar-app-font
       font-awesome
     ];
   };
 }
-

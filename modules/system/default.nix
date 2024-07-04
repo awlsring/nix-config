@@ -46,8 +46,7 @@
   };
 
   fonts = {
-    fontDir.enable = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       atkinson-hyperlegible
       jetbrains-mono
     ];

@@ -14,6 +14,7 @@
         allow_remote_control = "yes";
         shell_integration = "enabled";
       };
+      font.name = lib.mkForce "JetBrains Mono";
       font.size = lib.mkForce 14;
     };
   };
