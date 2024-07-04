@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }: {
-
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   options.apps = {
     enable = lib.mkEnableOption "enables desktop applications";
   };
@@ -12,6 +16,7 @@
       "spotify"
       "obsidian"
       "1password"
+      "godot"
     ];
   };
 }
