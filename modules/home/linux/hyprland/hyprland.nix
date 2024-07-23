@@ -103,11 +103,6 @@ in {
             "$mainMod, SPACE, exec, wofi --show drun --allow-images"
             "$mainMod, P, pin, active"
 
-            "$mainMod, left, movefocus, l"
-            "$mainMod, right, movefocus, r"
-            "$mainMod, up, movefocus, u"
-            "$mainMod, down, movefocus, d"
-
             "$mainMod, h, movefocus, l"
             "$mainMod, l, movefocus, r"
             "$mainMod, k, movefocus, u"
@@ -118,8 +113,11 @@ in {
             "$mainMod SHIFT, k, movewindow, u"
             "$mainMod SHIFT, j, movewindow, d"
 
-            # Add cycling through rotations
-            "$mainMod, r, layoutmsg, orientationtop"
+            # Orientation
+            "$mainMod, up, layoutmsg, orientationtop"
+            "$mainMod, down, layoutmsg, orientationbottom"
+            "$mainMod, left, layoutmsg, orientationleft"
+            "$mainMod, right, layoutmsg, orientationright"
 
             # Scroll through existing workspaces with mainMod + scroll
             "bind = $mainMod, mouse_down, workspace, e+1"
