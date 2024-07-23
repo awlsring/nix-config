@@ -56,10 +56,8 @@
     zsh.enable = true;
   };
 
-  # services.tailscale.enable = true;
-
-  # This doesn't work if null???
-  stylix = lib.mkIf (config.desktop.wallpaper != null) {
+  stylix = {
+    enable = true;
     image = config.desktop.wallpaper;
     polarity = "dark";
     fonts = {

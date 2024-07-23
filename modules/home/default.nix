@@ -1,4 +1,4 @@
-{ 
+{
   inputs,
   outputs,
   lib,
@@ -7,15 +7,17 @@
   hostType,
   stylix,
   wallpaper,
-  ... 
+  ...
 }: {
   imports = [
     stylix.homeManagerModules.stylix
     ./unix
     ./dev
-    ( 
-      if hostType == "nixos" || hostType == "linux" then ./linux 
-      else if hostType == "darwin" then ./darwin
+    (
+      if hostType == "nixos" || hostType == "linux"
+      then ./linux
+      else if hostType == "darwin"
+      then ./darwin
       else throw "Unsupported host type: ${hostType}"
     )
   ];
@@ -33,7 +35,8 @@
   };
 
   # Stylix config
-  stylix = lib.mkIf (wallpaper != null) {
+  stylix = {
+    enable = true;
     image = wallpaper;
     polarity = "dark";
     fonts = {

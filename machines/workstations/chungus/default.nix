@@ -94,9 +94,7 @@ in {
   };
 
   # Graphics
-  hardware.opengl = {
-    enable = true;
-  };
+  hardware.graphics.enable = true;
 
   # Enable nvidia drivers
   services.xserver.videoDrivers = ["nvidia"];
@@ -150,20 +148,6 @@ in {
       PasswordAuthentication = false;
     };
   };
-
-  # fonts.packages = with pkgs; [
-  #   (pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "Iosevka" "FiraCode"];})
-  #   cm_unicode
-  # ];
-
-  # fonts.enableDefaultPackages = true;
-  # fonts.fontconfig = {
-  #   defaultFonts = {
-  #     monospace = ["JetBrainsMono Nerd Font Mono"];
-  #     sansSerif = ["JetBrainsMono Nerd Font"];
-  #     serif = ["JetBrainsMono Nerd Font"];
-  #   };
-  # };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
