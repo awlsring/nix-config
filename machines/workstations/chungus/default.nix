@@ -50,7 +50,6 @@ in {
   };
 
   home-manager = {
-    useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = {inherit inputs outputs username wallpaper hostType stylix;};
     users.${username} = import ./home.nix;
@@ -97,8 +96,6 @@ in {
   # Graphics
   hardware.opengl = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
   };
 
   # Enable nvidia drivers
