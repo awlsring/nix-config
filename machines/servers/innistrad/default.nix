@@ -5,6 +5,7 @@
   pkgs,
   nfsServer,
   remoteDir,
+  localDir,
   ...
 }: {
   imports = [
@@ -15,7 +16,7 @@
   # tmp work around
   desktop.wallpaper = ../../../wallpapers/shaded_landscape.jpg;
 
-  fileSystems.${mediaDir} = {
+  fileSystems.${localDir} = {
     device = "${nfsServer}:${remoteDir}";
     fsType = "nfs";
   };

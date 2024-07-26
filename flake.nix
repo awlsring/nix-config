@@ -101,6 +101,7 @@
           username = "fin";
           nfsServer = "10.0.10.180"; # TODO: load this from config file
           remoteDir = "/mnt/WD-6D-8T/fin";
+          localDir = "/mnt/media";
           inherit inputs outputs hostType home-manager stylix sops-nix; # TODO: make stylix optional
         };
         modules = [./machines/servers/innistrad];
