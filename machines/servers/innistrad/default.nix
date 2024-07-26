@@ -15,7 +15,7 @@ in {
   ];
 
   # tmp work around
-  desktop.wallpaper = ../../../../wallpapers/shaded_landscape.jpg;
+  desktop.wallpaper = ../../../wallpapers/shaded_landscape.jpg;
 
   fileSystems.${mediaDir} = {
     device = "${nfsServer}:${remoteDir}";

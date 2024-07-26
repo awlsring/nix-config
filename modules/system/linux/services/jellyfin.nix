@@ -20,7 +20,7 @@
     services.jellyfin = {
       enable = true;
       openFirewall = true;
-      dataDir = jellyfin.mediaDir;
+      dataDir = config.jellyfin.mediaDir;
     };
     environment.systemPackages = with pkgs; [
       jellyfin
