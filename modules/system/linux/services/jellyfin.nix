@@ -8,10 +8,6 @@
   options = {
     jellyfin = {
       enable = lib.mkEnableOption "enables jellyfin";
-      mediaDir = lib.mkOption {
-        type = lib.types.path;
-        description = "Path to directory containing media files";
-      };
       intelTranscoding = lib.mkEnableOption "Enable Intel QuickSync transcoding";
     };
   };
@@ -20,7 +16,6 @@
     services.jellyfin = {
       enable = true;
       openFirewall = true;
-      dataDir = config.jellyfin.mediaDir;
     };
     environment.systemPackages = with pkgs; [
       jellyfin

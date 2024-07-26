@@ -6,9 +6,7 @@
   nfsServer,
   remoteDir,
   ...
-}: let
-  mediaDir = "/mnt/media";
-in {
+}: {
   imports = [
     ../../../modules/system
     ./hardware-configuration.nix
@@ -25,6 +23,5 @@ in {
   networking.hostName = "innistrad";
   jellyfin = {
     enable = true;
-    mediaDir = mediaDir;
   };
 }
