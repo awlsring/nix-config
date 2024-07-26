@@ -20,6 +20,7 @@
     services.jellyfin = {
       enable = true;
       openFirewall = true;
+      dataDir = jellyfin.mediaDir;
     };
     environment.systemPackages = with pkgs; [
       jellyfin
@@ -27,13 +28,15 @@
       jellyfin-ffmpeg
     ];
 
-    nixpkgs.config.packageOverrides =
-      lib.mkIf (config.jellyfin.intelTranscoding)
-      pkgs: {
-        vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
+    nixpkgs.config.packageOverrides = pkgs: {
+      vaapiIntel = lib.mkIf config.jellyfin.intelTranscoding {
+        vaapiIntel = pkgs.vaapiIntel.override {
+          enableHybridCodec = true;
+        };
       };
+    };
 
-    hardware.opengl = config.jellyfin.intelTranscoding {
+    hardware.opengl = lib.mkIf config.jellyfin.intelTranscoding {
       enable = true;
       extraPackages = with pkgs; [
         intel-media-driver

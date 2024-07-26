@@ -7,7 +7,7 @@
   remoteDir,
   ...
 }: let
-  mediaDir = /mnt/media;
+  mediaDir = "/mnt/media";
 in {
   imports = [
     ../../../modules/system
@@ -18,7 +18,7 @@ in {
   desktop.wallpaper = ../../../../wallpapers/shaded_landscape.jpg;
 
   fileSystems.${mediaDir} = {
-    device = "${nfsServer}:${mediaDir}";
+    device = "${nfsServer}:${remoteDir}";
     fsType = "nfs";
   };
 
