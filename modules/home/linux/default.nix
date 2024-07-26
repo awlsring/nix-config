@@ -1,4 +1,10 @@
-{ config, lib, pkgs, username, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  username,
+  ...
+}: {
   imports = [
     ./apps
     ./gaming
@@ -10,4 +16,3 @@
     homeDirectory = "/home/${username}";
   };
 }
-

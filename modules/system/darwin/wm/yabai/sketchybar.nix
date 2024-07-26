@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }: 
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   options = {
     "yabai-de".sketchybar = {
       configFile = lib.mkOption {

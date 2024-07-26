@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   options = {
     tailscale = {
       enable = lib.mkEnableOption "enables tailscale";
@@ -13,7 +17,7 @@
 
   config = lib.mkIf config.tailscale.enable {
     # make the tailscale command usable to users
-    environment.systemPackages = [ pkgs.tailscale ];
+    environment.systemPackages = [pkgs.tailscale];
 
     # enable the tailscale service
     services.tailscale.enable = true;
@@ -45,5 +49,4 @@
       '';
     };
   };
-
 }

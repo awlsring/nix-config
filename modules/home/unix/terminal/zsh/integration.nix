@@ -3,8 +3,7 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   config = lib.mkIf config.zsh.enable {
     programs.yazi = {
       enable = true;
@@ -21,12 +20,12 @@
         aws.disabled = true;
         # OS Symbol on prompt end
         custom.system_icons = {
-          command     = "([ $(uname -s) == 'Darwin' ] && echo ) || ([ $(uname -s) == 'Linux' ] && echo )";
-          symbol      = "|";
-          format      = "[$symbol]() [$output]($style) ";
-          style       = "bold";
-          shell       = ["bash" "--noprofile" "--norc"];
-          when        = "true";
+          command = "([ $(uname -s) == 'Darwin' ] && echo ) || ([ $(uname -s) == 'Linux' ] && echo )";
+          symbol = "|";
+          format = "[$symbol]() [$output]($style) ";
+          style = "bold";
+          shell = ["bash" "--noprofile" "--norc"];
+          when = "true";
         };
         # Add python when in venv
         custom.pythonenv = {

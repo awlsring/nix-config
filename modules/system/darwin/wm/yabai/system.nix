@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }: 
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   config = lib.mkIf config."yabai-de".enable {
     system.defaults = {
       dock = {
@@ -15,6 +19,3 @@
     };
   };
 }
-
-
-  

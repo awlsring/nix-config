@@ -1,8 +1,11 @@
-{ config, lib, pkgs, ... }:
-let
-  cfg = config.templates.k3s-worker;
-in 
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = config.templates.k3s-worker;
+in {
   imports = [
     ../system
   ];
@@ -24,7 +27,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    
     # set hostname
     networking.hostName = cfg.hostname;
 
@@ -34,7 +36,7 @@ in
     # allow open iscsi
     services.openiscsi = {
       enable = true;
-      name = "${config.networking.hostName}-initiatorhost"; 
+      name = "${config.networking.hostName}-initiatorhost";
     };
     services.target.enable = true;
 
@@ -47,7 +49,7 @@ in
       tokenFile = cfg.tokenPath;
       extraFlags = "--flannel-backend=none --disable-network-policy";
     };
-    environment.systemPackages = [ pkgs.nfs-utils ];
-    networking.firewall.allowedTCPPorts = [ 6443 ];
+    environment.systemPackages = [pkgs.nfs-utils];
+    networking.firewall.allowedTCPPorts = [6443];
   };
 }

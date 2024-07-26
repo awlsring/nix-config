@@ -1,6 +1,10 @@
-{ config, inputs, pkgs, lib, ... }:
 {
-
+  config,
+  inputs,
+  pkgs,
+  lib,
+  ...
+}: {
   options = {
     "scrutiny-collector" = {
       enable = lib.mkEnableOption "enables scrutiny collector";

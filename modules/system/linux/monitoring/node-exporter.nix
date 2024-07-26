@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   options = {
     "node-exporter" = {
       enable = lib.mkEnableOption "enables prometheus node exporter";
@@ -10,7 +14,7 @@
       };
       collectors = lib.mkOption {
         type = lib.types.listOf lib.types.str;
-        default = [ "systemd" ];
+        default = ["systemd"];
         description = "The collectors to enable";
       };
     };

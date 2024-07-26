@@ -3,8 +3,7 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   imports = [
     ./fastfetch.nix
     ./integration.nix
@@ -58,7 +57,10 @@
       zplug = {
         enable = true;
         plugins = [
-          { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; }
+          {
+            name = "romkatv/powerlevel10k";
+            tags = [as:theme depth:1];
+          }
         ];
       };
     };

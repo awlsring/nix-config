@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }: 
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   config = lib.mkIf config."yabai-de".enable {
     services.yabai.enable = true;
     services.yabai.package = pkgs.yabai;
@@ -9,4 +13,3 @@
     '';
   };
 }
-

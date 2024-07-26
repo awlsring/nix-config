@@ -1,5 +1,10 @@
-{ lib, fetchFromGitHub, jre, makeWrapper, maven }:
-
+{
+  lib,
+  fetchFromGitHub,
+  jre,
+  makeWrapper,
+  maven,
+}:
 maven.buildMavenPackage rec {
   pname = "smithy";
   version = "1.2.1";
@@ -13,7 +18,7 @@ maven.buildMavenPackage rec {
 
   mvnHash = "sha256-kLpjMj05uC94/5vGMwMlFzLKNFOKeyNvq/vmB6pHTAo=";
 
-  nativeBuildInputs = [ makeWrapper ];
+  nativeBuildInputs = [makeWrapper];
 
   installPhase = ''
     mkdir -p $out/bin $out/share/jd-cli
@@ -27,6 +32,6 @@ maven.buildMavenPackage rec {
     description = "Simple command line wrapper around JD Core Java Decompiler project";
     homepage = "https://github.com/intoolswetrust/jd-cli";
     license = lib.licenses.gpl3Plus;
-    maintainers = with lib.maintainers; [ majiir ];
+    maintainers = with lib.maintainers; [majiir];
   };
 }

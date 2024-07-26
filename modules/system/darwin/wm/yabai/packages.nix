@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }: 
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   config = lib.mkIf config."yabai-de".enable {
     # Brew packages
     homebrew = {
@@ -10,4 +14,3 @@
     };
   };
 }
-
