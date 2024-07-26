@@ -94,6 +94,18 @@
         modules = [./machines/servers/k3s/tarkir];
       };
 
+      # Jellyfin - Innistrad
+      innistrad = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          username = "fin";
+          nfsServer = "10.0.10.180"; # TODO: load this from config file
+          remoteDir = "/mnt/WD-6D-8T/fin";
+          inherit inputs outputs hostType home-manager stylix sops-nix; # TODO: make stylix optional
+        };
+        modules = [./machines/servers/innistrad];
+      };
+
       # Garage Storage - Naya
       naya = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};

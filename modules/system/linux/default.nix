@@ -13,6 +13,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  time.timeZone = "America/Los_Angeles";
+
   security.sudo.extraRules = [
     {
       users = ["privileged_user"];
