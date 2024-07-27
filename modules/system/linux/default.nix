@@ -19,7 +19,7 @@
 
   security.sudo.extraRules = [
     {
-      users = ["privileged_user"];
+      users = [username];
       commands = [
         {
           command = "ALL";
