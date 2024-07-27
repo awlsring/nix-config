@@ -32,7 +32,7 @@
   # media server sync
   services.syncthing = {
     enable = true;
-    openDefaultsPorts = true;
+    openDefaultPorts = true;
   };
 
   # media server
