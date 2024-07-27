@@ -31,7 +31,7 @@
       };
     };
 
-    hardware.opengl = lib.mkIf config.jellyfin.intelTranscoding {
+    hardware.graphics = lib.mkIf config.jellyfin.intelTranscoding {
       enable = true;
       extraPackages = with pkgs; [
         intel-media-driver

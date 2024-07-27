@@ -99,6 +99,7 @@
         system = "x86_64-linux";
         specialArgs = {
           username = "fin";
+          hostname = "innistrad"
           nfsServer = "10.0.10.180"; # TODO: load this from config file
           remoteDir = "/mnt/WD-6D-8T/fin";
           localDir = "/mnt/media";
