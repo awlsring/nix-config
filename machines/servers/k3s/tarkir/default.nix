@@ -12,9 +12,6 @@
 
   sops.secrets."k3s/token" = {};
 
-  # tmp work around
-  desktop.wallpaper = ../../../../wallpapers/shaded_landscape.jpg;
-
   # lump secret, hostname
   templates.k3s-worker = {
     enable = true;

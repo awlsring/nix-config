@@ -5,7 +5,6 @@
   outputs,
   hostType,
   username,
-  stylix,
   ...
 }: {
   imports = [
@@ -54,26 +53,5 @@
 
   programs = {
     zsh.enable = true;
-  };
-
-  stylix = {
-    enable = true;
-    image = config.desktop.wallpaper;
-    polarity = "dark";
-    fonts = {
-      monospace = {
-        package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
-        name = "JetBrainsMono Nerd Font Mono";
-      };
-      sansSerif = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Sans";
-      };
-      serif = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Serif";
-      };
-    };
-    homeManagerIntegration.autoImport = false;
   };
 }

@@ -60,20 +60,10 @@
     packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs;});
     formatter = forEachSystem (pkgs: pkgs.alejandra);
 
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild switch --flake .#machine'
+    # NixOS
     nixosConfigurations = let
       hostType = "nixos";
     in {
-      # Workstation - Toes
-      toes = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./machine/workstation/toes
-          ./modules
-        ];
-      };
-
       # Workstation - Chungus
       chungus = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -100,21 +90,12 @@
         specialArgs = {
           username = "fin";
           hostname = "innistrad";
-          nfsServer = "10.0.10.180"; # TODO: load this from config file
+          nfsServer = "10.0.10.180";
           remoteDir = "/mnt/WD-6D-8T/fin";
           localDir = "/mnt/media";
-          inherit inputs outputs hostType home-manager stylix sops-nix; # TODO: make stylix optional
+          inherit inputs outputs hostType home-manager stylix sops-nix;
         };
         modules = [./machines/servers/innistrad];
-      };
-
-      # Garage Storage - Naya
-      naya = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./machine/garage/naya
-          ./modules
-        ];
       };
     };
 
@@ -126,7 +107,6 @@
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {
           username = "rawmatth";
-          wallpaper = ./wallpapers/shaded_landscape.jpg; # todo make this work not being set
           inherit inputs outputs hostType home-manager stylix;
         };
         modules = [./machines/workstations/roach];

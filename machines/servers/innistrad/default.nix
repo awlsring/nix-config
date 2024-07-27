@@ -14,9 +14,6 @@
     ./hardware-configuration.nix
   ];
 
-  # tmp work around
-  desktop.wallpaper = ../../../wallpapers/shaded_landscape.jpg;
-
   # host config
   networking.hostName = hostname;
 

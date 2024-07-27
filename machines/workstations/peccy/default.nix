@@ -21,7 +21,10 @@ in {
 
   yabai-de.enable = true;
   apps.enable = true;
-  desktop.wallpaper = wallpaper;
+  stylixed = {
+    enable = true;
+    wallpaper = wallpaper;
+  };
 
   home-manager = {
     useUserPackages = true;

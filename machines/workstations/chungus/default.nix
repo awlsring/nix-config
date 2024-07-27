@@ -31,7 +31,10 @@ in {
 
   networking.hostName = "chungus";
   networking.networkmanager.enable = true;
-  desktop.wallpaper = wallpaper;
+  stylixed = {
+    enable = true;
+    wallpaper = wallpaper;
+  };
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
