@@ -3,7 +3,7 @@
   lib,
   config,
   pkgs,
-  hostname
+  hostname,
   nfsServer,
   remoteDir,
   localDir,
@@ -18,7 +18,7 @@
   desktop.wallpaper = ../../../wallpapers/shaded_landscape.jpg;
 
   # perfmorance monitoring tools
-  environment.systemPackages = with pkgs; [ bottom intel-gpu-tools ];
+  environment.systemPackages = with pkgs; [bottom intel-gpu-tools];
 
   fileSystems.${localDir} = {
     device = "${nfsServer}:${remoteDir}";
