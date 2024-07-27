@@ -39,6 +39,6 @@
   jellyfin = {
     enable = true;
     intelTranscoding = true;
-    jellyseer = true;
+    jellyseerr = true;
   };
 }

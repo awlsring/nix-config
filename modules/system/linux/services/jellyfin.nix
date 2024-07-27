@@ -9,7 +9,7 @@
     jellyfin = {
       enable = lib.mkEnableOption "enables jellyfin";
       intelTranscoding = lib.mkEnableOption "Enable Intel QuickSync transcoding";
-      jellyseer = lib.mkEnableOption "Enable Jellyseer";
+      jellyseerr = lib.mkEnableOption "Enable Jellyseer";
     };
   };
 
@@ -47,8 +47,8 @@
       ];
     };
 
-    # Jellyseer
-    services.jellyseer = lib.mkIf config.jellyfin.jellyseer {
+    # Jellyseerr
+    services.jellyseerr = lib.mkIf config.jellyfin.jellyseerr {
       enable = true;
       openFirewall = true;
     };
