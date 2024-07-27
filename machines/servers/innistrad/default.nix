@@ -17,6 +17,9 @@
   # host config
   networking.hostName = hostname;
 
+  # add to tailnet
+  tailscale.enable = true;
+
   # perfmorance monitoring tools
   environment.systemPackages = with pkgs; [bottom intel-gpu-tools];
 

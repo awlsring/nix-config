@@ -12,6 +12,11 @@
         default = "nix";
         description = "The tag to advertise to the Tailscale network";
       };
+      secret = lib.mkOption {
+        type = lib.types.str;
+        default = "tailscale/nix/secret";
+        description = "The secret to use to authenticate with Tailscale";
+      };
     };
   };
 
@@ -22,8 +27,7 @@
     # enable the tailscale service
     services.tailscale.enable = true;
 
-    # TODO: make secret name configurable
-    sops.secrets."tailscale/oauth/secret" = {};
+    sops.secrets.${config.tailscale.secret} = {};
 
     systemd.services.tailscale-autoconnect = {
       description = "Automatic connection to Tailscale";
@@ -48,7 +52,7 @@
         fi
 
         # otherwise authenticate with tailscale
-        ${tailscale}/bin/tailscale up --auth-key=$(cat ${config.sops.secrets."tailscale/oauth/secret".path})?preauthorized=true --advertise-tags=tag:${config.tailscale.tag}
+        ${tailscale}/bin/tailscale up --auth-key=$(cat ${config.sops.secrets."${config.tailscale.secret}".path})?preauthorized=true --advertise-tags=tag:${config.tailscale.tag}
       '';
     };
 
