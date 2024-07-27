@@ -9,10 +9,12 @@
     jellyfin = {
       enable = lib.mkEnableOption "enables jellyfin";
       intelTranscoding = lib.mkEnableOption "Enable Intel QuickSync transcoding";
+      jellyseer = lib.mkEnableOption "Enable Jellyseer";
     };
   };
 
   config = lib.mkIf config.jellyfin.enable {
+    # Jellyfin
     services.jellyfin = {
       enable = true;
       openFirewall = true;
@@ -23,6 +25,7 @@
       jellyfin-ffmpeg
     ];
 
+    # Intel Transcoding
     nixpkgs.config.packageOverrides = pkgs: {
       vaapiIntel = lib.mkIf config.jellyfin.intelTranscoding {
         vaapiIntel = pkgs.vaapiIntel.override {
@@ -42,6 +45,12 @@
         vpl-gpu-rt # QSV on 11th gen or newer
         intel-media-sdk # QSV up to 11th gen
       ];
+    };
+
+    # Jellyseer
+    services.jellyseer = lib.mkIf config.jellyfin.jellyseer {
+      enable = true;
+      openFirewall = true;
     };
   };
 }
