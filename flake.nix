@@ -28,6 +28,12 @@
     # vscode-server
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
+    # deploy-rs
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -41,6 +47,7 @@
     sops-nix,
     systems,
     stylix,
+    deploy-rs,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -132,6 +139,19 @@
           inherit inputs outputs hostType home-manager stylix sops-nix;
         };
         modules = [./machines/workstations/peccy];
+      };
+    };
+
+    # Deployments
+    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+    deploy.nodes = {
+      innistrad = {
+        hostname = "innistrad";
+        profiles.system = {
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.innistrad;
+          sshUser = "fin";
+          remoteBuild = true;
+        };
       };
     };
   };
