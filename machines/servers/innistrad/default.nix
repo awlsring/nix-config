@@ -16,7 +16,7 @@
 
   # host config
   networking.hostName = hostname;
-  services.logrotrate.enable = true; # rotate logs
+  services.logrotate.enable = true; # rotate logs
   system.autoUpgrade = {
     # allow auto-upgrade
     enable = true;
