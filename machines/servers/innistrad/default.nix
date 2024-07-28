@@ -16,6 +16,12 @@
 
   # host config
   networking.hostName = hostname;
+  services.logrotrate.enable = true; # rotate logs
+  system.autoUpgrade = {
+    # allow auto-upgrade
+    enable = true;
+    allowReboot = true;
+  };
 
   # add to tailnet
   tailscale.enable = true;
