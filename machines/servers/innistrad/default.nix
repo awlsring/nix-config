@@ -36,12 +36,7 @@
   };
 
   # media server sync
-  networking.firewall.allowedTCPPorts = [8384 22000];
-  services.syncthing = {
-    enable = true;
-    openDefaultPorts = true;
-    guiAddress = "0.0.0.0:8384";
-  };
+  syncthing.enable = true;
 
   # media server
   jellyfin = {
