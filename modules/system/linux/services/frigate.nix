@@ -76,8 +76,8 @@ in {
         default = ["person"];
         description = "List of objects to track";
       };
-      cameras = mkOption {
-        type = attrsOf cameraFormat;
+      cameras = lib.mkOption {
+        type = lib.attrsOf cameraFormat;
         description = ''
           Attribute set of cameras configurations.
 
