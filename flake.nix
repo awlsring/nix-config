@@ -37,6 +37,15 @@
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Disko
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Impermanence
+    impermanence.url = "github:nix-community/impermanence";
   };
 
   outputs = {
@@ -48,6 +57,8 @@
     systems,
     stylix,
     deploy-rs,
+    disko,
+    impermanence,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -76,7 +87,7 @@
         system = "x86_64-linux";
         specialArgs = {
           username = "awlsring";
-          inherit inputs outputs hostType home-manager stylix sops-nix;
+          inherit inputs outputs hostType home-manager stylix sops-nix disko impermanence;
         };
         modules = [./machines/workstations/chungus];
       };
@@ -86,7 +97,7 @@
         system = "x86_64-linux";
         specialArgs = {
           username = "k3s";
-          inherit inputs outputs hostType home-manager stylix sops-nix;
+          inherit inputs outputs hostType home-manager stylix sops-nix disko impermanence;
         };
         modules = [./machines/servers/k3s/tarkir];
       };
@@ -100,7 +111,7 @@
           nfsServer = "10.0.10.180";
           remoteDir = "/mnt/WD-6D-8T/fin";
           localDir = "/mnt/media";
-          inherit inputs outputs hostType home-manager stylix sops-nix;
+          inherit inputs outputs hostType home-manager stylix sops-nix disko impermanence;
         };
         modules = [./machines/servers/innistrad];
       };
