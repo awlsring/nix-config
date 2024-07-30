@@ -115,6 +115,17 @@
         };
         modules = [./machines/servers/innistrad];
       };
+
+      # Test - Shandalar
+      shandalar = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          username = "awlsring";
+          hostname = "shandalar";
+          inherit inputs outputs hostType home-manager stylix sops-nix disko impermanence;
+        };
+        modules = [./machines/servers/shandalar];
+      };
     };
 
     # Linux (non-NixOS)
