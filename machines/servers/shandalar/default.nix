@@ -4,16 +4,12 @@
   config,
   pkgs,
   hostname,
-  nfsServer,
-  remoteDir,
-  localDir,
   ...
 }: {
   imports = [
     ../../../modules/system
     ./hardware-configuration.nix
-    ./disko.nix
-    {device = "/dev/sda";}
+    (import ./disko.nix {device = "/dev/sda";})
   ];
 
   # host config
@@ -27,4 +23,6 @@
 
   # add to tailnet
   tailscale.enable = true;
+
+  impermanence.enable = true;
 }

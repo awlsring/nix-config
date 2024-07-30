@@ -1,6 +1,7 @@
 {
   inputs,
   username,
+  config,
   ...
 }: {
   imports = [
