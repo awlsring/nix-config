@@ -15,7 +15,7 @@
   ];
 
   home.packages = with pkgs; [
-    go_1_22
+    go_1_23
     python313
     nodejs_22
     rustc
