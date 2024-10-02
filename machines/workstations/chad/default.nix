@@ -1,27 +1,33 @@
 {
-  home-manager,
   inputs,
   outputs,
   lib,
   config,
   pkgs,
-  hostType,
   stylix,
-  username,
+  home-manager,
+  darwinModules,
   ...
 }: let
+  username = "awlsring";
   wallpaper = ../../../wallpapers/shaded_landscape.jpg;
 in {
   imports = [
-    ../../../modules/system
+    darwinModules.system
     home-manager.darwinModules.home-manager
   ];
 
   networking.hostName = "chad";
 
+  system = {
+    enable = true;
+    username = username;
+  };
+  brew = {
+    enable = true;
+    apps.extras = ["godot"];
+  };
   yabai-de.enable = true;
-  tailscale.enable = true;
-  apps.enable = true;
   stylixed = {
     enable = true;
     wallpaper = wallpaper;
@@ -29,7 +35,7 @@ in {
 
   home-manager = {
     useUserPackages = true;
-    extraSpecialArgs = {inherit inputs outputs username wallpaper hostType stylix;};
+    extraSpecialArgs = {inherit inputs outputs username stylix darwinModules;};
     users.${username} = import ./home.nix;
   };
 }

@@ -9,6 +9,7 @@
     ./apps
     ./gaming
     ./hyprland
+    ../common
   ];
 
   home = {

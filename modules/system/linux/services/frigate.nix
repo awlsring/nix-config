@@ -19,7 +19,7 @@
               freeformType = format.type;
               options = {
                 path = lib.mkOption {
-                  type = lib.types.string;
+                  type = lib.types.str;
                   example = "rtsp://192.0.2.1:554/rtsp";
                   description = ''
                     Stream URL
@@ -47,7 +47,7 @@ in {
       coral = {
         enable = lib.mkEnableOption "enables coral tpu";
         type = lib.mkOption {
-          type = lib.types.string;
+          type = lib.types.str;
           default = "usb";
           description = "Coral TPU type";
         };
@@ -60,7 +60,7 @@ in {
           description = "Number of days to keep recordings";
         };
         captureMode = lib.mkOption {
-          type = lib.types.string;
+          type = lib.types.str;
           default = "all";
           description = "Capture mode";
         };
@@ -72,7 +72,7 @@ in {
       };
       enableSnapshots = lib.mkEnableOption "enables snapshots";
       trackedObjects = lib.mkOption {
-        type = lib.types.listOf lib.types.string;
+        type = lib.types.listOf lib.types.str;
         default = ["person"];
         description = "List of objects to track";
       };

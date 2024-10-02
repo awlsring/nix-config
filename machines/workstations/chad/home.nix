@@ -1,19 +1,11 @@
-{
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  wallpaper,
-  ...
-}: {
-  imports = [
-    ../../../modules/home
-  ];
+{darwinModules, ...}: {
+  imports = [darwinModules.home];
 
   tools.enable = true;
-  zsh.enable = true;
+  shell = {
+    zsh.enable = true;
+    kitty.enable = true;
+  };
   neovim.enable = true;
   tmux.enable = true;
-  lazygit.enable = true;
 }

@@ -71,6 +71,17 @@
           config.allowUnfree = true;
         }
     );
+
+    nixosModules = {};
+    darwinModules = {
+      system = (
+        import ./modules/system/darwin {
+          inherit (nixpkgs) config pkgs lib;
+          inherit stylix;
+        }
+      );
+      home = import ./modules/home/darwin;
+    };
   in {
     inherit lib;
 
@@ -143,14 +154,11 @@
     };
 
     # Macs (Darwin)
-    darwinConfigurations = let
-      hostType = "darwin";
-    in {
+    darwinConfigurations = {
       chad = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = {
-          username = "awlsring";
-          inherit inputs outputs hostType home-manager stylix sops-nix;
+          inherit inputs outputs home-manager stylix darwinModules;
         };
         modules = [./machines/workstations/chad];
       };
@@ -158,7 +166,7 @@
         system = "aarch64-darwin";
         specialArgs = {
           username = "rawmatth";
-          inherit inputs outputs hostType home-manager stylix sops-nix;
+          inherit inputs outputs home-manager stylix darwinModules;
         };
         modules = [./machines/workstations/peccy];
       };
