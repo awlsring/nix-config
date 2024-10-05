@@ -6,7 +6,6 @@
   ...
 }: {
   options.dev = {
-    enable = lib.mkEnableOption "enables home";
     email = lib.mkOption {
       type = lib.types.str;
       default = "contact@matthewrawlings.com";
@@ -29,7 +28,7 @@
     };
   };
 
-  config = lib.mkIf config.dev.enable {
+  config = {
     programs.git = {
       enable = true;
       userName = username;
