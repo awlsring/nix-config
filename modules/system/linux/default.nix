@@ -1,17 +1,21 @@
 {
-  inputs,
-  username,
   config,
+  lib,
+  stylix,
+  impermanence,
+  disko,
+  sops-nix,
   ...
 }: {
   imports = [
     ./monitoring
     ./services
     ./impermanence
-    inputs.impermanence.nixosModules.impermanence
-    inputs.disko.nixosModules.disko
-    inputs.stylix.nixosModules.stylix
-    inputs.sops-nix.nixosModules.sops
+    impermanence.nixosModules.impermanence
+    disko.nixosModules.disko
+    stylix.nixosModules.stylix
+    sops-nix.nixosModules.sops
+    ../common
   ];
 
   system.stateVersion = "23.11";

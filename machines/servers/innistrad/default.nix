@@ -7,6 +7,7 @@
   nfsServer,
   remoteDir,
   localDir,
+  nixosModules,
   ...
 }: let
   jellyfinDomain = "fin.us-drig-1.drigs.org";
@@ -14,7 +15,7 @@
   jellySeerDomain = "requests.us-drig-1.drigs.org";
 in {
   imports = [
-    ../../../modules/system
+    nixosModules.system
     ./hardware-configuration.nix
   ];
 
@@ -22,7 +23,6 @@ in {
   networking.hostName = hostname;
   services.logrotate.enable = true; # rotate logs
   system.autoUpgrade = {
-    # allow auto-upgrade
     enable = true;
     allowReboot = true;
   };

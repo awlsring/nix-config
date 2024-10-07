@@ -72,7 +72,14 @@
         }
     );
 
-    nixosModules = {};
+    nixosModules = {
+      system = (
+        import ./modules/system/linux {
+          inherit (nixpkgs) config pkgs lib;
+          inherit stylix impermanence disko sops-nix;
+        }
+      );
+    };
     darwinModules = {
       system = (
         import ./modules/system/darwin {
@@ -122,7 +129,7 @@
           nfsServer = "10.0.10.180";
           remoteDir = "/mnt/WD-6D-8T/fin";
           localDir = "/mnt/media";
-          inherit inputs outputs hostType home-manager stylix sops-nix disko impermanence;
+          inherit inputs outputs nixosModules;
         };
         modules = [./machines/servers/innistrad];
       };
