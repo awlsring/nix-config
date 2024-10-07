@@ -17,17 +17,18 @@ in {
     home-manager.darwinModules.home-manager
   ];
 
-  networking.hostName = "chad";
-
-  system = {
-    enable = true;
+  machine = {
     username = username;
+    hostname = "chad";
   };
+
   brew = {
     enable = true;
     apps.extras = ["godot"];
   };
+
   yabai-de.enable = true;
+
   stylixed = {
     enable = true;
     wallpaper = wallpaper;

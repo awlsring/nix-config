@@ -20,7 +20,6 @@ in {
   ];
 
   # host config
-  networking.hostName = hostname;
   services.logrotate.enable = true; # rotate logs
   system.autoUpgrade = {
     enable = true;

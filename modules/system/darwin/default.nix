@@ -8,7 +8,7 @@
   imports = [
     ./homebrew
     ./stylixed
-    ./system
+    ./machine
     ./yabai
     ../common
     stylix.darwinModules.stylix

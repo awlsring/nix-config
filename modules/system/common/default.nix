@@ -8,6 +8,7 @@
 }: {
   imports = [
     ./stylixed
+    ./machine
   ];
 
   nixpkgs = {

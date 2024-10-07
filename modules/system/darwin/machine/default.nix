@@ -4,16 +4,7 @@
   pkgs,
   ...
 }: {
-  options.system = {
-    enable = lib.mkEnableOption "Enables the system module";
-    username = lib.mkOption {
-      type = lib.types.str;
-      default = "awlsring";
-      description = "The username of the user";
-    };
-  };
-
-  config = lib.mkIf config.system.enable {
+  config =  {
     environment = {
       systemPath = lib.mkBefore [
         "/opt/homebrew/bin"
@@ -27,10 +18,10 @@
       '';
     };
 
-    users.users.${config.system.username} = {
+    users.users.${config.machine.username} = {
       createHome = true;
       description = "Matthew Rawlings";
-      home = "/Users/${config.system.username}";
+      home = "/Users/${config.machine.username}";
       isHidden = false;
       shell = pkgs.zsh;
     };
