@@ -35,6 +35,17 @@ in {
     allowReboot = true;
   };
 
+  # deployment
+  services.comin = {
+    enable = true;
+    hostname = hostname;
+    remotes = [{
+      name = "origin";
+      url = "https://github.com/awlsring/nix-config.git";
+      branches.main.name = "main";
+    }];
+  };
+
   # add to tailnet
   tailscale.enable = true;
 

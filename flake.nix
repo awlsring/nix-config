@@ -46,6 +46,12 @@
 
     # Impermanence
     impermanence.url = "github:nix-community/impermanence";
+
+    # Coming https://github.com/nlewo/comin
+    comin = {
+      url = "github:nlewo/comin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -59,6 +65,7 @@
     deploy-rs,
     disko,
     impermanence,
+    comin,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -76,7 +83,7 @@
       system = (
         import ./modules/system/linux {
           inherit (nixpkgs) config pkgs lib;
-          inherit stylix impermanence disko sops-nix;
+          inherit stylix impermanence disko sops-nix comin;
         }
       );
     };
