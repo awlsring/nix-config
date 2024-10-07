@@ -50,7 +50,7 @@ in {
   tailscale.enable = true;
 
   # perfmorance monitoring tools
-  environment.systemPackages = with pkgs; [bottom intel-gpu-tools];
+  environment.systemPackages = with pkgs; [bat bottom intel-gpu-tools];
 
   # media mount
   fileSystems.${localDir} = {

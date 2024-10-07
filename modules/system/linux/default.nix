@@ -5,6 +5,7 @@
   impermanence,
   disko,
   sops-nix,
+  comin,
   ...
 }: {
   imports = [
@@ -12,6 +13,7 @@
     disko.nixosModules.disko
     stylix.nixosModules.stylix
     sops-nix.nixosModules.sops
+    comin.nixosModules.comin
     ./monitoring
     ./services
     ./impermanence
