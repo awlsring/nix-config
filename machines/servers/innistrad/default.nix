@@ -10,7 +10,10 @@
   nixosModules,
   ...
 }: let
-  jellyfinDomain = "fin.us-drig-1.drigs.org";
+  username = "fin";
+  hostname = "innistrad";
+
+  jellyfinDomain = "jellyfin.us-drig-1.drigs.org";
   jellyfinPublic = "fin.drigs.org";
   jellySeerDomain = "requests.us-drig-1.drigs.org";
 in {
@@ -18,6 +21,12 @@ in {
     nixosModules.system
     ./hardware-configuration.nix
   ];
+
+  # machine config
+  machine = {
+    username = username;
+    hostname = hostname;
+  };
 
   # host config
   services.logrotate.enable = true; # rotate logs
