@@ -28,12 +28,6 @@
     # vscode-server
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
-    # deploy-rs
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -47,7 +41,7 @@
     # Impermanence
     impermanence.url = "github:nix-community/impermanence";
 
-    # Coming https://github.com/nlewo/comin
+    # Comin https://github.com/nlewo/comin
     comin = {
       url = "github:nlewo/comin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -80,12 +74,15 @@
     );
 
     nixosModules = {
-      system = (
-        import ./modules/system/linux {
-          inherit (nixpkgs) config pkgs lib;
-          inherit stylix impermanence disko sops-nix comin;
-        }
-      );
+      system = {pkgs, ...} @ args: {
+        imports = [
+          (
+            import ./modules/system/linux inputs {
+              inherit stylix impermanence disko sops-nix comin;
+            }
+          )
+        ];
+      };
     };
     darwinModules = {
       system = {pkgs, ...} @ args: {
@@ -115,27 +112,14 @@
     formatter = forEachSystem (pkgs: pkgs.alejandra);
 
     # NixOS
-    nixosConfigurations = let
-      hostType = "nixos";
-    in {
+    nixosConfigurations = {
       # Workstation - Chungus
       chungus = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          username = "awlsring";
-          inherit inputs outputs hostType home-manager stylix sops-nix disko impermanence;
+          inherit inputs outputs home-manager nixosModules;
         };
         modules = [./machines/workstations/chungus];
-      };
-
-      # K3S Node - Tarkir
-      tarkir = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          username = "k3s";
-          inherit inputs outputs hostType home-manager stylix sops-nix disko impermanence;
-        };
-        modules = [./machines/servers/k3s/tarkir];
       };
 
       # Jellyfin - Innistrad
@@ -151,21 +135,11 @@
         };
         modules = [./machines/servers/innistrad];
       };
-
-      # Test - Shandalar
-      shandalar = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          username = "awlsring";
-          hostname = "shandalar";
-          inherit inputs outputs hostType home-manager stylix sops-nix disko impermanence;
-        };
-        modules = [./machines/servers/shandalar];
-      };
     };
 
-    # Macs (Darwin)
+    # macOS
     darwinConfigurations = {
+      # Workstation - Chad
       chad = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = {

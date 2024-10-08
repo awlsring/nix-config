@@ -6,11 +6,11 @@
   config,
   pkgs,
   home-manager,
-  hostType,
-  stylix,
-  username,
+  nixosModules,
   ...
 }: let
+  username = "awlsring";
+  hostname = "chungus";
   wallpaper = ../../../wallpapers/shaded_landscape.jpg;
 in {
   imports = [
@@ -19,6 +19,25 @@ in {
     home-manager.nixosModules.home-manager
   ];
 
+  # machine config
+  machine = {
+    username = username;
+    hostname = hostname;
+  };
+
+  # deployment
+  services.comin = {
+    enable = true;
+    hostname = hostname;
+    remotes = [
+      {
+        name = "origin";
+        url = "https://github.com/awlsring/nix-config.git";
+        branches.main.name = "main";
+      }
+    ];
+  };
+
   # TODO: move these
   environment.systemPackages = with pkgs; [
     git
@@ -26,10 +45,6 @@ in {
     protonup
   ];
 
-  # tailscale.enable = true;
-  # services.vscode-server.enable = true;
-
-  networking.hostName = "chungus";
   networking.networkmanager.enable = true;
   stylixed = {
     enable = true;
@@ -54,7 +69,7 @@ in {
 
   home-manager = {
     useUserPackages = true;
-    extraSpecialArgs = {inherit inputs outputs username wallpaper hostType stylix;};
+    extraSpecialArgs = {inherit inputs outputs username nixosModules;};
     users.${username} = import ./home.nix;
   };
 

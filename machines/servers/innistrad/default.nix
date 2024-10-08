@@ -3,7 +3,6 @@
   lib,
   config,
   pkgs,
-  hostname,
   nfsServer,
   remoteDir,
   localDir,
@@ -28,22 +27,24 @@ in {
     hostname = hostname;
   };
 
+  # deployment
+  services.comin = {
+    enable = true;
+    hostname = hostname;
+    remotes = [
+      {
+        name = "origin";
+        url = "https://github.com/awlsring/nix-config.git";
+        branches.main.name = "main";
+      }
+    ];
+  };
+
   # host config
   services.logrotate.enable = true; # rotate logs
   system.autoUpgrade = {
     enable = true;
     allowReboot = true;
-  };
-
-  # deployment
-  services.comin = {
-    enable = true;
-    hostname = hostname;
-    remotes = [{
-      name = "origin";
-      url = "https://github.com/awlsring/nix-config.git";
-      branches.main.name = "main";
-    }];
   };
 
   # add to tailnet

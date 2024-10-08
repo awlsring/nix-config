@@ -4,7 +4,6 @@
   lib,
   config,
   pkgs,
-  stylix,
   home-manager,
   darwinModules,
   ...

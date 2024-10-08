@@ -6,7 +6,7 @@
 }: let
   cfg = config.machine;
 in {
-  config =  {
+  config = {
     system.stateVersion = "23.11";
 
     boot.loader.systemd-boot.enable = true;

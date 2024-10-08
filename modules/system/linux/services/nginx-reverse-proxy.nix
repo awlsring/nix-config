@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
- cfg = config.nginx-reverse-proxy;
+  cfg = config.nginx-reverse-proxy;
 in {
   options = {
     nginx-reverse-proxy = {
@@ -34,17 +34,25 @@ in {
       recommendedOptimisation = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
-      virtualHosts = lib.foldl' (acc: proxy: let
-        allDomains = [ proxy.domain ] ++ proxy.extraNames;
-      in acc // lib.foldl' (accHosts: domain: accHosts // {
-          "${domain}" = {
-            useACMEHost = proxy.domain;  # Always use the main domain for ACME certificate
-            forceSSL = true;
-            locations."/".proxyPass = proxy.proxyTarget;
-            extraConfig = proxy.nginxExtraConfig;
-          };
-        }) {} allDomains
-      ) {} cfg.proxies;
+      virtualHosts =
+        lib.foldl' (
+          acc: proxy: let
+            allDomains = [proxy.domain] ++ proxy.extraNames;
+          in
+            acc
+            // lib.foldl' (accHosts: domain:
+              accHosts
+              // {
+                "${domain}" = {
+                  useACMEHost = proxy.domain; # Always use the main domain for ACME certificate
+                  forceSSL = true;
+                  locations."/".proxyPass = proxy.proxyTarget;
+                  extraConfig = proxy.nginxExtraConfig;
+                };
+              }) {}
+            allDomains
+        ) {}
+        cfg.proxies;
     };
 
     # certs
@@ -59,12 +67,15 @@ in {
         dnsPropagationCheck = true;
         group = config.services.nginx.group;
       };
-      certs = lib.foldl' (acc: proxy: acc // {
-        "${proxy.domain}" = {
-          domain = proxy.domain;
-          extraDomainNames = proxy.extraNames;
-        };
-      }) {} cfg.proxies;
+      certs = lib.foldl' (acc: proxy:
+        acc
+        // {
+          "${proxy.domain}" = {
+            domain = proxy.domain;
+            extraDomainNames = proxy.extraNames;
+          };
+        }) {}
+      cfg.proxies;
     };
 
     networking.firewall.allowedTCPPorts = [80 443];

@@ -1,13 +1,10 @@
-{
-  config,
-  lib,
-  stylix,
+inputs: {
   impermanence,
   disko,
+  stylix,
   sops-nix,
   comin,
-  ...
-}: {
+}: {...}: {
   imports = [
     impermanence.nixosModules.impermanence
     disko.nixosModules.disko
