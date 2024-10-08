@@ -57,7 +57,6 @@ in {
   fileSystems.${localDir} = {
     device = "${nfsServer}:${remoteDir}";
     fsType = "nfs";
-    options = [ "x-systemd.automount" "noauto" ];
   };
 
   # media server sync
