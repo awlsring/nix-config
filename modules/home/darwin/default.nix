@@ -1,8 +1,7 @@
-{
+inputs: {stylix}: {
   config,
   lib,
   pkgs,
-  stylix,
   username,
   ...
 }: {

@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  config =  {
+  config = {
     environment = {
       systemPath = lib.mkBefore [
         "/opt/homebrew/bin"

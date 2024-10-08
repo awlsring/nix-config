@@ -88,13 +88,24 @@
       );
     };
     darwinModules = {
-      system = (
-        import ./modules/system/darwin {
-          inherit (nixpkgs) config pkgs lib;
-          inherit stylix;
-        }
-      );
-      home = import ./modules/home/darwin;
+      system = {pkgs, ...} @ args: {
+        imports = [
+          (
+            import ./modules/system/darwin inputs {
+              inherit stylix;
+            }
+          )
+        ];
+      };
+      home = {pkgs, ...} @ args: {
+        imports = [
+          (
+            import ./modules/home/darwin inputs {
+              inherit stylix;
+            }
+          )
+        ];
+      };
     };
   in {
     inherit lib;
@@ -153,49 +164,14 @@
       };
     };
 
-    # Linux (non-NixOS)
-    homeConfigurations = let
-      hostType = "linux";
-    in {
-      roach = lib.homeManagerConfiguration {
-        pkgs = pkgsFor.x86_64-linux;
-        extraSpecialArgs = {
-          username = "rawmatth";
-          inherit inputs outputs hostType home-manager stylix;
-        };
-        modules = [./machines/workstations/roach];
-      };
-    };
-
     # Macs (Darwin)
     darwinConfigurations = {
       chad = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = {
-          inherit inputs outputs home-manager stylix darwinModules;
+          inherit inputs outputs home-manager darwinModules;
         };
         modules = [./machines/workstations/chad];
-      };
-      peccy = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = {
-          username = "rawmatth";
-          inherit inputs outputs home-manager stylix darwinModules;
-        };
-        modules = [./machines/workstations/peccy];
-      };
-    };
-
-    # Deployments
-    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
-    deploy.nodes = {
-      innistrad = {
-        hostname = "innistrad";
-        profiles.system = {
-          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.innistrad;
-          sshUser = "fin";
-          remoteBuild = true;
-        };
       };
     };
   };

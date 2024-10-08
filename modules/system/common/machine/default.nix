@@ -15,7 +15,7 @@
     };
   };
 
-  config =  {
+  config = {
     networking.hostName = config.machine.hostname;
   };
 }

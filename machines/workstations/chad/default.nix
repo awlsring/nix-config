@@ -24,7 +24,14 @@ in {
 
   brew = {
     enable = true;
-    apps.extras = ["godot"];
+    apps = {
+      extras = ["godot"];
+      masExtras = {
+        "Tailscale" = 1475387142;
+        "Xcode" = 497799835;
+        "Final Cut Pro" = 424389933;
+      };
+    };
   };
 
   yabai-de.enable = true;
@@ -36,7 +43,7 @@ in {
 
   home-manager = {
     useUserPackages = true;
-    extraSpecialArgs = {inherit inputs outputs username stylix darwinModules;};
+    extraSpecialArgs = {inherit inputs outputs username darwinModules;};
     users.${username} = import ./home.nix;
   };
 }

@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  stylix,
-  ...
-}: {
+inputs: {stylix}: {...}: {
   imports = [
     ./homebrew
     ./stylixed
