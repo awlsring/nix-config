@@ -7,7 +7,7 @@
   cfg = config.machine;
 in {
   config = {
-    system.stateVersion = "23.11";
+    system.stateVersion = "24.11";
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
