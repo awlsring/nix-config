@@ -56,7 +56,6 @@
     sops-nix,
     systems,
     stylix,
-    deploy-rs,
     disko,
     impermanence,
     comin,
@@ -84,6 +83,7 @@
         ];
       };
     };
+
     darwinModules = {
       system = {pkgs, ...} @ args: {
         imports = [
@@ -104,6 +104,7 @@
         ];
       };
     };
+    
   in {
     inherit lib;
 
