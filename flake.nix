@@ -41,7 +41,7 @@
     # Impermanence
     impermanence.url = "github:nix-community/impermanence";
 
-    # Comin https://github.com/nlewo/comin
+    # Comin
     comin = {
       url = "github:nlewo/comin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -72,7 +72,7 @@
         }
     );
 
-    nixosModules = {
+    linuxModules = {
       system = {pkgs, ...} @ args: {
         imports = [
           (
@@ -104,6 +104,8 @@
         ];
       };
     };
+
+    wallpapers = import ./wallpapers;
     
   in {
     inherit lib;
@@ -112,13 +114,18 @@
     packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs;});
     formatter = forEachSystem (pkgs: pkgs.alejandra);
 
+    linuxModules = linuxModules;
+    darwinModules = darwinModules;
+
+    wallpapers = wallpapers;
+
     # NixOS
     nixosConfigurations = {
       # Workstation - Chungus
       chungus = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit inputs outputs home-manager nixosModules;
+          inherit inputs outputs home-manager linuxModules wallpapers;
         };
         modules = [./machines/workstations/chungus];
       };
@@ -130,7 +137,7 @@
           nfsServer = "10.0.10.180";
           remoteDir = "/mnt/WD-6D-8T/fin";
           localDir = "/mnt/media";
-          inherit inputs outputs nixosModules;
+          inherit inputs outputs linuxModules;
         };
         modules = [./machines/servers/innistrad];
       };
@@ -142,7 +149,7 @@
       chad = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = {
-          inherit inputs outputs home-manager darwinModules;
+          inherit inputs outputs home-manager darwinModules wallpapers;
         };
         modules = [./machines/workstations/chad];
       };

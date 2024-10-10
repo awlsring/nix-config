@@ -11,7 +11,6 @@
 }: let
   username = "awlsring";
   hostname = "chungus";
-  wallpaper = ../../../wallpapers/shaded_landscape.jpg;
 in {
   imports = [
     ../../../modules/system
@@ -48,7 +47,7 @@ in {
   networking.networkmanager.enable = true;
   stylixed = {
     enable = true;
-    wallpaper = wallpaper;
+    wallpaper = wallpapers.shaded_landscape;
   };
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

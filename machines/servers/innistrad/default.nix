@@ -17,7 +17,7 @@
   jellySeerDomain = "requests.us-drig-1.drigs.org";
 in {
   imports = [
-    nixosModules.system
+    linuxModules.system
     ./hardware-configuration.nix
   ];
 

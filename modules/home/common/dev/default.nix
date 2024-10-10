@@ -16,6 +16,11 @@
       default = {};
       description = "Shell aliases to add";
     };
+    sessionPath = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      description = "List paths to include";
+    };
     sessionVariables = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
       default = {};
@@ -37,6 +42,7 @@
 
     home.sessionVariables = config.dev.sessionVariables;
     home.shellAliases = config.dev.shellAliases;
+    home.sessionPath = config.dev.sessionPath;
 
     home.packages = with pkgs;
       [

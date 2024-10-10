@@ -6,10 +6,10 @@
   pkgs,
   home-manager,
   darwinModules,
+  wallpapers,
   ...
 }: let
   username = "awlsring";
-  wallpaper = ../../../wallpapers/shaded_landscape.jpg;
 in {
   imports = [
     darwinModules.system
@@ -37,7 +37,7 @@ in {
 
   stylixed = {
     enable = true;
-    wallpaper = wallpaper;
+    wallpaper = wallpapers.shaded_landscape;
   };
 
   home-manager = {
