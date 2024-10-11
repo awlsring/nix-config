@@ -6,7 +6,7 @@
   nfsServer,
   remoteDir,
   localDir,
-  nixosModules,
+  linuxModules,
   ...
 }: let
   username = "fin";
