@@ -10,7 +10,7 @@ in {
     enable = lib.mkEnableOption "enables prometheus node exporter";
     port = lib.mkOption {
       type = lib.types.int;
-      default = 9100;
+      default = 9090;
       description = "The port to listen on";
     };
     collectors = lib.mkOption {

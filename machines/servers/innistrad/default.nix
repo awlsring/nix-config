@@ -39,6 +39,7 @@ in {
         name = "origin";
         url = "https://github.com/awlsring/nix-config.git";
         branches.main.name = "main";
+        exporter.openFirewall = true;
       }
     ];
   };
