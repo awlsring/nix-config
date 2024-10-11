@@ -18,6 +18,11 @@ in {
       default = ["systemd"];
       description = "The collectors to enable";
     };
+    dontOpenFirewall = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Don't open the firewall for the node exporter";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -25,6 +30,7 @@ in {
       enable = true;
       enabledCollectors = cfg.collectors;
       port = cfg.port;
+      openFirewall = !cfg.dontOpenFirewall;
     };
   };
 }
