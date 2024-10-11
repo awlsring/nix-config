@@ -15,7 +15,18 @@ in {
     };
     collectors = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = ["systemd"];
+      default = [
+        "cpu"
+        "filesystem"
+        "meminfo"
+        "netstat"
+        "netdev"
+        "systemd"
+        "diskstats"
+        "processes"
+        "loadavg"
+        "time"
+      ];
       description = "The collectors to enable";
     };
     dontOpenFirewall = lib.mkOption {
