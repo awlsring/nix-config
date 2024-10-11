@@ -34,12 +34,12 @@ in {
   services.comin = {
     enable = true;
     hostname = hostname;
+    exporter.openFirewall = true;
     remotes = [
       {
         name = "origin";
         url = "https://github.com/awlsring/nix-config.git";
         branches.main.name = "main";
-        exporter.openFirewall = true;
       }
     ];
   };
