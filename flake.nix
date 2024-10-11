@@ -106,7 +106,6 @@
     };
 
     wallpapers = import ./wallpapers;
-    
   in {
     inherit lib;
 

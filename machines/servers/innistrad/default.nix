@@ -27,6 +27,9 @@ in {
     hostname = hostname;
   };
 
+  # enable monitoring
+  monitoring.node-exporter.enable = true;
+
   # deployment
   services.comin = {
     enable = true;
