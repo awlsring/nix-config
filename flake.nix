@@ -140,6 +140,15 @@
         };
         modules = [./machines/servers/innistrad];
       };
+
+      # Ulgrotha
+      ulgrotha = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs outputs linuxModules;
+        };
+        modules = [./machines/servers/ulgrotha];
+      };
     };
 
     # macOS
