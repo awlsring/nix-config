@@ -4,6 +4,7 @@
   config,
   pkgs,
   nfsServer,
+  remoteDir,
   linuxModules,
   ...
 }: let
@@ -50,7 +51,7 @@ in {
 
   # camera storage mount
   fileSystems."mnt/frigate" = {
-    device = "${nfsServer}:/mnt/WD-6D-8T/frigate";
+    device = "${nfsServer}:${remoteDir}";
     fsType = "nfs";
   };
 

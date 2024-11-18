@@ -141,6 +141,17 @@
         modules = [./machines/servers/innistrad];
       };
 
+      # Kaladesh
+      kaladesh = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          nfsServer = "10.0.10.180";
+          remoteDir = "/mnt/WD-6D-8T/frigate";
+          inherit inputs outputs linuxModules;
+        };
+        modules = [./machines/servers/kaladesh];
+      };
+
       # Ulgrotha
       ulgrotha = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
