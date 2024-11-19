@@ -15,6 +15,8 @@ in {
     linuxModules.system
     ./hardware-configuration.nix
     ./docker-wyze-bridge.nix
+    ./docker-home-assistant.nix
+    ./docker-frigate.nix
   ];
 
   # machine config
@@ -56,11 +58,7 @@ in {
   };
 
   services = {
-    frigate = {
-      enable = true;
-    };
     mosquitto.enable = true;
-    home-assistant.enable = true;
   };
 
   virtualisation.podman = {
@@ -78,5 +76,5 @@ in {
 
   virtualisation.oci-containers.backend = "podman";
 
-  networking.firewall.allowedTCPPorts = [80 443 5000];
+  networking.firewall.allowedTCPPorts = [80 443 8123 5000 5001];
 }
