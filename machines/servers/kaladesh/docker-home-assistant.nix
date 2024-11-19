@@ -18,36 +18,16 @@
     ];
   };
 
-  systemd.services."home-assistant" = {
+  systemd.services."podman-homeassistant" = {
     serviceConfig = {
-      Restart = lib.mkOverride 90 "always";
+      Restart = lib.mkOverride 500 "always";
     };
-    after = [
-      "podman-network-home-assistant_default.service"
-    ];
-    requires = [
-      "podman-network-home-assistant_default.service"
-    ];
     partOf = [
       "podman-compose-home-assistant-root.target"
     ];
     wantedBy = [
       "podman-compose-home-assistant-root.target"
     ];
-  };
-
-  systemd.services."podman-network-home-assistant_default" = {
-    path = [pkgs.podman];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      ExecStop = "podman network rm -f home-assistant_default";
-    };
-    script = ''
-      podman network inspect home-assistant_default || podman network create home-assistant_default
-    '';
-    partOf = ["podman-compose-home-assistant-root.target"];
-    wantedBy = ["podman-compose-home-assistant-root.target"];
   };
 
   systemd.targets."podman-compose-home-assistant-root" = {

@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: {
   sops.secrets = {
@@ -10,9 +11,9 @@
 
   virtualisation.oci-containers.containers."frigate" = {
     image = "ghcr.io/blakeblackshear/frigate:stable";
-    environmentFile = [
-      sops.secrets."frigate/plus-key".path
-      sops.secrets."frigate/rtsp-password".path
+    environmentFiles = [
+      config.sops.secrets."frigate/plus-key".path
+      config.sops.secrets."frigate/rtsp-password".path
     ];
     volumes = [
       "/dev/bus/usb:/dev/bus/usb:rw"
