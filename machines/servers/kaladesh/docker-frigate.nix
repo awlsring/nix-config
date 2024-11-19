@@ -39,6 +39,7 @@
   systemd.services."podman-frigate" = {
     serviceConfig = {
       Restart = lib.mkOverride 500 "always";
+      StateDirectory = "frigate/config";
     };
     after = [
       "podman-network-frigate_default.service"

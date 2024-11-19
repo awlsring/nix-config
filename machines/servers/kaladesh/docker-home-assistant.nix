@@ -7,7 +7,6 @@
     image = "ghcr.io/home-assistant/home-assistant:stable";
     volumes = [
       "/var/lib/home-assistant/config:/config:rw"
-      "/var/lib/home-assistant/media:/media:rw"
       "/etc/localtime:/etc/localtime:ro"
       "/run/dbus:/run/dbus:ro"
     ];
@@ -21,6 +20,7 @@
   systemd.services."podman-homeassistant" = {
     serviceConfig = {
       Restart = lib.mkOverride 500 "always";
+      StateDirectory = "home-assistant/config";
     };
     partOf = [
       "podman-compose-home-assistant-root.target"
