@@ -13,8 +13,9 @@
   hostname = "innistrad";
 
   jellyfinDomain = "jellyfin.us-drig-1.drigs.org";
-  jellyfinPublic = "fin.drigs.org";
+  jellyfinPublic = "jellyfin.drigs.org";
   jellySeerDomain = "requests.us-drig-1.drigs.org";
+  jellySeerPublic = "requests.drigs.org";
 in {
   imports = [
     linuxModules.system
@@ -118,6 +119,7 @@ in {
       };
       ${jellySeerDomain} = {
         domain = jellySeerDomain;
+        extraDomainNames = [jellySeerPublic];
       };
     };
   };
