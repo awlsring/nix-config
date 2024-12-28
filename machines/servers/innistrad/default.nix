@@ -92,7 +92,22 @@ in {
           proxy_set_header Connection $http_connection;
         '';
       };
+      ${jellyfinPublic} = {
+        useACMEHost = jellyfinPublic;
+        forceSSL = true;
+        locations."/".proxyPass = "http://127.0.0.1:8096";
+        extraConfig = ''
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection $http_connection;
+        '';
+      };
       ${jellySeerDomain} = {
+        useACMEHost = jellySeerDomain;
+        forceSSL = true;
+        locations."/".proxyPass = "http://127.0.0.1:5055";
+      };
+      ${jellySeerPublic} = {
         useACMEHost = jellySeerDomain;
         forceSSL = true;
         locations."/".proxyPass = "http://127.0.0.1:5055";
@@ -115,11 +130,15 @@ in {
     certs = {
       ${jellyfinDomain} = {
         domain = jellyfinDomain;
-        extraDomainNames = [jellyfinPublic];
+      };
+      ${jellyfinPublic} = {
+        domain = jellyfinPublic;
       };
       ${jellySeerDomain} = {
         domain = jellySeerDomain;
-        extraDomainNames = [jellySeerPublic];
+      };
+      ${jellySeerPublic} = {
+        domain = jellySeerPublic;
       };
     };
   };
