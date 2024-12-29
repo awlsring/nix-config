@@ -10,6 +10,11 @@
       type = lib.types.str;
       default = "alt";
     };
+    terminal = lib.mkOption {
+      description = "Terminal to open";
+      type = lib.types.str;
+      default = "kitty";
+    };
   };
 
   config = lib.mkIf config."yabai-de".enable (let
@@ -20,7 +25,7 @@
       package = pkgs.skhd;
       skhdConfig = ''
         # opens terminal
-        ${super} - return : open -a kitty
+        ${super} - return : open -a ${config."yabai-de".skhd.terminal}
 
         # Navigation
         ${super} - h : yabai -m window --focus west

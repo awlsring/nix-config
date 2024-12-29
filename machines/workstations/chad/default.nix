@@ -33,7 +33,10 @@ in {
     };
   };
 
-  yabai-de.enable = true;
+  yabai-de = {
+    enable = true;
+    skhd.terminal = "/Applications/Ghostty.app";
+  };
 
   stylixed = {
     enable = true;
