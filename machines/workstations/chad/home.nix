@@ -4,7 +4,6 @@
   tools.enable = true;
   shell = {
     zsh.enable = true;
-    kitty.enable = true;
   };
   dev = {
     email = "contact@matthewrawlings.com";

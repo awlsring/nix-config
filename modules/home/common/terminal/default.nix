@@ -5,8 +5,6 @@
   ...
 }: {
   imports = [
-    ./zsh
-    ./fastfetch
-    ./starship
+    ./kitty
   ];
 }

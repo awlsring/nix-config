@@ -8,6 +8,7 @@
     ./dev
     ./neovim
     ./shell
+    ./terminal
     ./stylixed
     ./tmux
     ./tools

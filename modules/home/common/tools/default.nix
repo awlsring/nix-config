@@ -61,8 +61,8 @@
         fd
         httpie
         jq
-        awscli2
-        _1password
+        awscli
+        _1password-cli
         alejandra
         tmux
         sops
