@@ -33,10 +33,7 @@ in {
     };
   };
 
-  yabai-de = {
-    enable = true;
-    skhd.terminal = "/Applications/Ghostty.app";
-  };
+  aerospace.enable = true;
 
   stylixed = {
     enable = true;

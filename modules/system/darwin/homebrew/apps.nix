@@ -26,6 +26,8 @@
         "spotify"
         "obsidian"
         "1password"
+        "alfred"
+        "ghostty"
       ]
       ++ config.brew.apps.extras;
 

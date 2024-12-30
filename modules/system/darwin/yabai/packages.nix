@@ -9,7 +9,6 @@
     homebrew = {
       casks = [
         "sf-symbols"
-        "alfred"
       ];
     };
   };
