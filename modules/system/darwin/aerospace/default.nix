@@ -64,6 +64,7 @@ with lib; {
           ctrl-alt-d = "workspace D";
           ctrl-alt-s = "workspace S";
           ctrl-alt-m = "workspace M";
+          ctrl-alt-e = "workspace E";
           ctrl-alt-space = "workspace SMS";
 
           ctrl-alt-shift-left = ["move-node-to-workspace --wrap-around prev" "workspace --wrap-around prev"];
@@ -78,6 +79,7 @@ with lib; {
           ctrl-alt-shift-8 = "move-node-to-workspace 8";
           ctrl-alt-shift-9 = "move-node-to-workspace 9";
           ctrl-alt-shift-0 = "move-node-to-workspace 10";
+          ctrl-alt-shift-e = "move-node-to-workspace E";
 
           alt-enter = "exec-and-forget open /Applications/Ghostty.app";
 
@@ -97,6 +99,23 @@ with lib; {
           alt-shift-j = ["join-with down" "mode main"];
           alt-shift-k = ["join-with up" "mode main"];
           alt-shift-l = ["join-with right" "mode main"];
+        };
+        workspace-to-monitor-force-assignment = {
+          "1" = [ "main" ];
+          "2" = [ "main" ];
+          "3" = [ "main" ];
+          "4" = [ "main" ];
+          "5" = [ "main" ];
+          "6" = [ "main" ];
+          "7" = [ "main" ];
+          "8" = [ "main" ];
+          "9" = [ "main" ];
+          "10" = [ "main" ];
+          "D" = [ "secondary" ];
+          "S" = [ "secondary" ];
+          "M" = [ "secondary" ];
+          "E" = [ "secondary" ];
+          "SMS" = [ "secondary" ];
         };
         on-window-detected = [
           # Floating windows
@@ -143,6 +162,15 @@ with lib; {
           {
             "if".app-id = "com.apple.MobileSMS";
             run = "move-node-to-workspace SMS";
+          }
+          ## Email
+          {
+            "if".app-id = "com.apple.mail";
+            run = "move-node-to-workspace E";
+          }
+          {
+            "if".app-id = "com.microsoft.Outlook";
+            run = "move-node-to-workspace E";
           }
         ];
         gaps = {
