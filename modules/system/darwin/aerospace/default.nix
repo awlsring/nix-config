@@ -35,14 +35,12 @@ with lib; {
           alt-q = "close --quit-if-last-window";
 
           alt-left = "focus --boundaries all-monitors-outer-frame left";
-          alt-down = "focus --boundaries all-monitors-outer-frame down";
-          alt-up = "focus --boundaries all-monitors-outer-frame up";
           alt-right = "focus --boundaries all-monitors-outer-frame right";
 
-          alt-h = "focus left";
-          alt-j = "focus down";
-          alt-k = "focus up";
-          alt-l = "focus right";
+          alt-h = "focus --boundaries all-monitors-outer-frame left";
+          alt-j = "focus --boundaries all-monitors-outer-frame down";
+          alt-k = "focus --boundaries all-monitors-outer-frame up";
+          alt-l = "focus --boundaries all-monitors-outer-frame right";
 
           alt-shift-left = "move left";
           alt-shift-right = "move right";
