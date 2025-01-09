@@ -16,7 +16,6 @@
 
   config = lib.mkIf config.hyprland.enable {
     home.packages = with pkgs; [
-      cinnamon.nemo-with-extensions # file manager
       qalculate-gtk # calculator
       grim
       slurp

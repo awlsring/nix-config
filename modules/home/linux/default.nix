@@ -1,4 +1,4 @@
-{
+inputs: {stylix}: {
   config,
   lib,
   pkgs,
@@ -6,6 +6,7 @@
   ...
 }: {
   imports = [
+    stylix.homeManagerModules.stylix
     ./apps
     ./gaming
     ./hyprland

@@ -6,17 +6,20 @@
   config,
   pkgs,
   home-manager,
-  nixosModules,
+  linuxModules,
+  wallpapers,
   ...
 }: let
   username = "awlsring";
   hostname = "chungus";
+  wallpaper = wallpapers.shaded_landscape;
 in {
   imports = [
-    ../../../modules/system
+    linuxModules.system
     ./hardware-configuration.nix
     home-manager.nixosModules.home-manager
   ];
+  services.vscode-server.enable = true;
 
   # machine config
   machine = {
@@ -24,18 +27,7 @@ in {
     hostname = hostname;
   };
 
-  # deployment
-  services.comin = {
-    enable = true;
-    hostname = hostname;
-    remotes = [
-      {
-        name = "origin";
-        url = "https://github.com/awlsring/nix-config.git";
-        branches.main.name = "main";
-      }
-    ];
-  };
+  tailscale.enable = true;
 
   # TODO: move these
   environment.systemPackages = with pkgs; [
@@ -47,7 +39,7 @@ in {
   networking.networkmanager.enable = true;
   stylixed = {
     enable = true;
-    wallpaper = wallpapers.shaded_landscape;
+    wallpaper = wallpaper;
   };
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -68,11 +60,10 @@ in {
 
   home-manager = {
     useUserPackages = true;
-    extraSpecialArgs = {inherit inputs outputs username nixosModules;};
+    extraSpecialArgs = {inherit inputs outputs username linuxModules wallpaper;};
     users.${username} = import ./home.nix;
   };
 
-  sound.enable = false;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -121,7 +112,7 @@ in {
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-  services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+  services.udev.packages = with pkgs; [gnome-settings-daemon];
 
   programs.zsh.enable = true;
 
@@ -165,7 +156,4 @@ in {
       PasswordAuthentication = false;
     };
   };
-
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "23.11";
 }

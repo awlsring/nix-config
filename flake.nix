@@ -59,6 +59,7 @@
     disko,
     impermanence,
     comin,
+    vscode-server,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -78,6 +79,15 @@
           (
             import ./modules/system/linux inputs {
               inherit stylix impermanence disko sops-nix comin;
+            }
+          )
+        ];
+      };
+      home = {pkgs, ...} @ args: {
+        imports = [
+          (
+            import ./modules/home/linux inputs {
+              inherit stylix;
             }
           )
         ];
@@ -126,7 +136,7 @@
         specialArgs = {
           inherit inputs outputs home-manager linuxModules wallpapers;
         };
-        modules = [./machines/workstations/chungus];
+        modules = [./machines/workstations/chungus vscode-server.nixosModules.default];
       };
 
       # Jellyfin - Innistrad
