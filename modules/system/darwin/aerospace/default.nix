@@ -101,21 +101,21 @@ with lib; {
           alt-shift-l = ["join-with right" "mode main"];
         };
         workspace-to-monitor-force-assignment = {
-          "1" = [ "main" ];
-          "2" = [ "main" ];
-          "3" = [ "main" ];
-          "4" = [ "main" ];
-          "5" = [ "main" ];
-          "6" = [ "main" ];
-          "7" = [ "main" ];
-          "8" = [ "main" ];
-          "9" = [ "main" ];
-          "10" = [ "main" ];
-          "D" = [ "secondary" ];
-          "S" = [ "secondary" ];
-          "M" = [ "secondary" ];
-          "E" = [ "secondary" ];
-          "SMS" = [ "secondary" ];
+          "1" = ["main"];
+          "2" = ["main"];
+          "3" = ["main"];
+          "4" = ["main"];
+          "5" = ["main"];
+          "6" = ["main"];
+          "7" = ["main"];
+          "8" = ["main"];
+          "9" = ["main"];
+          "10" = ["main"];
+          "D" = ["secondary"];
+          "S" = ["secondary"];
+          "M" = ["secondary"];
+          "E" = ["secondary"];
+          "SMS" = ["secondary"];
         };
         on-window-detected = [
           # Floating windows
