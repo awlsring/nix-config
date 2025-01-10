@@ -111,11 +111,11 @@ with lib; {
           "8" = ["main"];
           "9" = ["main"];
           "10" = ["main"];
-          "D" = ["secondary"];
-          "S" = ["secondary"];
-          "M" = ["secondary"];
-          "E" = ["secondary"];
-          "SMS" = ["secondary"];
+          "D" = ["built-in" "secondary"];
+          "S" = ["built-in" "secondary"];
+          "M" = ["built-in" "secondary"];
+          "E" = ["built-in" "secondary"];
+          "SMS" = ["built-in" "secondary"];
         };
         on-window-detected = [
           # Floating windows
