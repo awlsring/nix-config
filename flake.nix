@@ -54,7 +54,7 @@
     };
 
     dynamic-ip-watcher = {
-      url = "/home/awlsring/Code/dynamic-ip-watcher";
+      url = "github:awlsring/dynamic-ip-watcher";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
