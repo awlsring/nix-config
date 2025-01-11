@@ -40,7 +40,13 @@
       userEmail = config.dev.email;
     };
 
-    home.sessionVariables = config.dev.sessionVariables;
+    home.sessionVariables = lib.mkMerge [
+      {
+        SOPS_AGE_KEY_FILE = "~/.config/sops/age/keys.txt";
+        KUBECONFIG = "~/.kube/config";
+      }
+      config.dev.sessionVariables
+    ];
     home.shellAliases = config.dev.shellAliases;
     home.sessionPath = config.dev.sessionPath;
 

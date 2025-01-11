@@ -19,6 +19,7 @@ in {
   machine = {
     username = username;
     hostname = "chad";
+    class = "desktop";
   };
 
   brew = {
