@@ -14,8 +14,8 @@
       "WB_AUTH" = "True";
       "WB_PASSWORD" = "admin";
       "WB_USERNAME" = "admin";
-      "WYZE_EMAIL" = "mattcanemail@gmail.com";
-      "WYZE_PASSWORD" = "mNcrhqoe!2o4anoRUMqE";
+      "WYZE_EMAIL" = "";
+      "WYZE_PASSWORD" = "";
     };
     ports = [
       "1936:1935/tcp"
