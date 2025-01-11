@@ -165,6 +165,7 @@
           inherit inputs outputs linuxModules;
         };
         modules = [
+          srvos.nixosModules.server
           dynamic-ip-watcher.nixosModules.dynamic-ip-watcher
           ./machines/servers/innistrad
         ];

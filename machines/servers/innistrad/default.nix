@@ -9,7 +9,6 @@
   linuxModules,
   ...
 }: let
-  username = "fin";
   hostname = "innistrad";
 
   jellyfinDomain = "jellyfin.us-drig-1.drigs.org";
@@ -24,8 +23,8 @@ in {
 
   # machine config
   machine = {
-    username = username;
     hostname = hostname;
+    class = "server";
   };
 
   # enable monitoring

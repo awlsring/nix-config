@@ -13,6 +13,11 @@
       type = lib.types.str;
       description = "The hostname of the system";
     };
+    class = lib.mkOption {
+      type = lib.types.enum ["desktop" "server"];
+      default = "server";
+      description = "The class of the machine";
+    };
   };
 
   config = {
