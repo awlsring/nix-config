@@ -21,6 +21,8 @@ in {
   ];
   services.vscode-server.enable = true;
 
+  networking.interfaces.enp39s0.wakeOnLan.enable = true;
+
   # machine config
   machine = {
     username = username;
