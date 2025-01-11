@@ -41,9 +41,20 @@
     # Impermanence
     impermanence.url = "github:nix-community/impermanence";
 
+    # SrvOS
+    srvos = {
+      url = "github:nix-community/srvos";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Comin
     comin = {
       url = "github:nlewo/comin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    dynamic-ip-watcher = {
+      url = "/home/awlsring/Code/dynamic-ip-watcher";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -58,8 +69,10 @@
     stylix,
     disko,
     impermanence,
+    srvos,
     comin,
     vscode-server,
+    dynamic-ip-watcher,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -136,7 +149,10 @@
         specialArgs = {
           inherit inputs outputs home-manager linuxModules wallpapers;
         };
-        modules = [./machines/workstations/chungus vscode-server.nixosModules.default];
+        modules = [
+          vscode-server.nixosModules.default
+          ./machines/workstations/chungus
+        ];
       };
 
       # Jellyfin - Innistrad
@@ -148,7 +164,10 @@
           localDir = "/mnt/media";
           inherit inputs outputs linuxModules;
         };
-        modules = [./machines/servers/innistrad];
+        modules = [
+          dynamic-ip-watcher.nixosModules.dynamic-ip-watcher
+          ./machines/servers/innistrad
+        ];
       };
 
       # Kaladesh

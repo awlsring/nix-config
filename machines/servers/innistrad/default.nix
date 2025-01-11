@@ -143,5 +143,31 @@ in {
     };
   };
 
+  # Update DNS record
+  sops.secrets."ddns/discordWebhook" = {
+    owner = "dynamic-ip-watcher";
+  };
+
+  sops.secrets."ddns/cloudflareKey" = {
+    owner = "dynamic-ip-watcher";
+  };
+
+  services.dynamic-ip-watcher = {
+    enable = true;
+    dnsRecord = {
+      type = "cloudflare";
+      zoneName = "drigs.org";
+      apiKey = config.sops.secrets."ddns/cloudflareKey".path;
+      recordName = "us-drig-1.drigs.org";
+    };
+    notifiers = [
+      {
+        type = "discord";
+        webhookUrl = config.sops.secrets."ddns/discordWebhook".path;
+        username = "IPWatcher";
+      }
+    ];
+  };
+
   networking.firewall.allowedTCPPorts = [80 443];
 }
