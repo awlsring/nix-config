@@ -24,5 +24,11 @@ in {
       enable = true;
       settings. PasswordAuthentication = false;
     };
+
+    # Monitoring
+    monitoring.node-exporter.enable = true;
+
+    # Rotate logs
+    services.logrotate.enable = true;
   };
 }

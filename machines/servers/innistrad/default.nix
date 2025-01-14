@@ -21,6 +21,9 @@ in {
     ./hardware-configuration.nix
   ];
 
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   # machine config
   machine = {
     hostname = hostname;
@@ -40,9 +43,6 @@ in {
   };
   networking.nameservers = ["1.1.1.1" "10.10.10.10" "100.100.100.100"];
 
-  # enable monitoring
-  monitoring.node-exporter.enable = true;
-
   # deployment
   services.comin = {
     enable = true;
@@ -58,7 +58,6 @@ in {
   };
 
   # host config
-  services.logrotate.enable = true; # rotate logs
   system.autoUpgrade = {
     enable = true;
     allowReboot = true;

@@ -171,6 +171,19 @@
         ];
       };
 
+      # Public Reverse Proxy - Conflux
+      conflux = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs outputs linuxModules;
+        };
+        modules = [
+          srvos.nixosModules.server
+          srvos.nixosModules.hardware-hetzner-cloud
+          ./machines/servers/conflux
+        ];
+      };
+
       # Kaladesh
       kaladesh = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
