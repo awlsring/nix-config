@@ -178,9 +178,23 @@
           inherit inputs outputs linuxModules;
         };
         modules = [
+          disko.nixosModules.disko
           srvos.nixosModules.server
           srvos.nixosModules.hardware-hetzner-cloud
           ./machines/servers/conflux
+        ];
+      };
+
+      # Dominaria
+      dominaria = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs outputs linuxModules;
+        };
+        modules = [
+          disko.nixosModules.disko
+          srvos.nixosModules.server
+          ./machines/servers/dominaria
         ];
       };
 
