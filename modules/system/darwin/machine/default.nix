@@ -28,7 +28,6 @@
 
     services = {
       nix-daemon = {
-        enable = true;
         logFile = "/var/log/nix-daemon.log";
       };
     };
@@ -40,12 +39,12 @@
       };
       stateVersion = 4;
       defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
-      includeUninstaller = false;
       defaults.finder = {
         AppleShowAllExtensions = true;
         ShowPathbar = true;
         FXEnableExtensionChangeWarning = false;
       };
+      tools.darwin-uninstaller.enable = false;
       activationScripts.postUserActivation.text = lib.mkAfter ''
         # apply system configs without reboot
         /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
