@@ -20,6 +20,7 @@
   config = lib.mkIf config.brew.enable {
     homebrew.casks =
       [
+        "claude"
         "firefox"
         "discord"
         "slack"
