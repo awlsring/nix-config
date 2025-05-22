@@ -33,6 +33,7 @@
     };
 
     system = {
+      primaryUser = config.machine.username;
       keyboard = {
         enableKeyMapping = true;
         remapCapsLockToControl = true;
@@ -44,8 +45,11 @@
         ShowPathbar = true;
         FXEnableExtensionChangeWarning = false;
       };
+      defaults.NSGlobalDomain = {
+        "com.apple.swipescrolldirection" = false;
+      };
       tools.darwin-uninstaller.enable = false;
-      activationScripts.postUserActivation.text = lib.mkAfter ''
+      activationScripts.postActivation.text = lib.mkAfter ''
         # apply system configs without reboot
         /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
       '';

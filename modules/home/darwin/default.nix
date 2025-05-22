@@ -6,7 +6,7 @@ inputs: {stylix}: {
   ...
 }: {
   imports = [
-    stylix.homeManagerModules.stylix
+    stylix.homeModules.stylix
     ../common
   ];
 

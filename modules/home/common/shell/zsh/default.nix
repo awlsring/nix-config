@@ -44,7 +44,7 @@
         config.shell.zsh.aliases
       ];
 
-      initExtra = ''
+      initContent = ''
         # Run fastfetch cause its cool
         ${pkgs.fastfetch}/bin/fastfetch
 
