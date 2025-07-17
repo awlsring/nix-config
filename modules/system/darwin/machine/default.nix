@@ -39,14 +39,18 @@
         remapCapsLockToControl = true;
       };
       stateVersion = 4;
-      defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
-      defaults.finder = {
-        AppleShowAllExtensions = true;
-        ShowPathbar = true;
-        FXEnableExtensionChangeWarning = false;
-      };
-      defaults.NSGlobalDomain = {
-        "com.apple.swipescrolldirection" = false;
+      defaults = {
+        finder = {
+          AppleShowAllExtensions = true;
+          ShowPathbar = true;
+          FXEnableExtensionChangeWarning = false;
+        };
+        SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
+        NSGlobalDomain = {
+          "com.apple.swipescrolldirection" = false;
+          AppleICUForce24HourTime = true;
+        };
+
       };
       tools.darwin-uninstaller.enable = false;
       activationScripts.postActivation.text = lib.mkAfter ''
