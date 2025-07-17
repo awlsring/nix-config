@@ -40,14 +40,9 @@
             type = "terminal";
             key = "term";
           }
-          "break"
           {
             type = "localip";
             key = "local ip";
-          }
-          {
-            type = "wifi";
-            key = "wifi";
           }
           "break"
           {
@@ -78,10 +73,6 @@
           {
             type = "battery";
             key = "battery";
-          }
-          {
-            type = "poweradapter";
-            key = "power";
           }
         ];
       };
