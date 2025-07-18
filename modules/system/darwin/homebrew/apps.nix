@@ -18,6 +18,10 @@
   };
 
   config = lib.mkIf config.brew.enable {
+    homebrew.brews = [
+      "lima"
+      "lima-additional-guestagents"
+    ];
     homebrew.casks =
       [
         "claude"

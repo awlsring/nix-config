@@ -50,7 +50,6 @@
           "com.apple.swipescrolldirection" = false;
           AppleICUForce24HourTime = true;
         };
-
       };
       tools.darwin-uninstaller.enable = false;
       activationScripts.postActivation.text = lib.mkAfter ''

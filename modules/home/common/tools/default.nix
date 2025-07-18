@@ -71,7 +71,6 @@
         glow
         kubectl
         k9s
-        lima
       ]
       ++ config.tools.extra;
   };
