@@ -57,6 +57,7 @@
         nodejs_22
         rustc
         cargo
+        claude-code
       ]
       ++ config.dev.pkgs;
   };
