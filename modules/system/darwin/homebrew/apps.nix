@@ -19,6 +19,7 @@
 
   config = lib.mkIf config.brew.enable {
     homebrew.brews = [
+      "codex"
       "lima"
       "lima-additional-guestagents"
     ];
@@ -33,6 +34,8 @@
         "1password"
         "alfred"
         "ghostty"
+        "chatgpt"
+        "notion"
       ]
       ++ config.brew.apps.extras;
 

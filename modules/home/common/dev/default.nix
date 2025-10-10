@@ -42,8 +42,8 @@
 
     home.sessionVariables = lib.mkMerge [
       {
-        SOPS_AGE_KEY_FILE = "~/.config/sops/age/keys.txt";
-        KUBECONFIG = "~/.kube/config";
+        SOPS_AGE_KEY_FILE = "$HOME/.config/sops/age/keys.txt";
+        KUBECONFIG = "$HOME/.kube/config";
       }
       config.dev.sessionVariables
     ];
@@ -52,12 +52,13 @@
 
     home.packages = with pkgs;
       [
-        go_1_23
+        go
         python313
         nodejs_22
         rustc
         cargo
         claude-code
+        go-mockery
       ]
       ++ config.dev.pkgs;
   };
