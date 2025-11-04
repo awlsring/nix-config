@@ -1,33 +1,16 @@
+{ ... }:
 {
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
   imports = [
-    ./waybar.nix
     ./hyprland.nix
+    ./exec-once.nix
+    ./monitors.nix
+    ./settings.nix
+    ./binds.nix
+    ./windowrules.nix
+    ./hypridle.nix
+    ./hyprlock.nix
+    ./variables.nix
+    ./waybar.nix
+    ./launcher.nix
   ];
-
-  options.hyprland = {
-    enable = lib.mkEnableOption "enables hyprland wm";
-  };
-
-  config = lib.mkIf config.hyprland.enable {
-    home.packages = with pkgs; [
-      qalculate-gtk # calculator
-      grim
-      slurp
-      wl-clipboard
-      eww
-      rofi-wayland
-      wofi
-      swww
-      libnotify
-      networkmanagerapplet
-      pavucontrol
-      pamixer
-    ];
-  };
 }

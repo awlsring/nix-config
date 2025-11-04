@@ -1,19 +1,15 @@
 {
   config,
   lib,
-  pkgs,
   ...
-}: let
-  cfg = config.machine;
-in {
+}: {
   imports = [
-    ./server.nix
-    ./desktop.nix
+    ./common
+    ./laptop
+    ./desktop
   ];
 
   config = {
-    system.stateVersion = "24.11";
-
-    time.timeZone = "America/Los_Angeles";
+    system.stateVersion = "25.05";
   };
 }

@@ -10,6 +10,7 @@ inputs: {stylix}: {
     ./apps
     ./gaming
     ./hyprland
+    # ./waybar
     ../common
   ];
 

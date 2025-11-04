@@ -12,13 +12,14 @@
 
   config = lib.mkIf config.apps.enable {
     home.packages = with pkgs; [
-      # discord
-      vesktop
-      slack
+      discord
       obsidian
       spotify
       _1password-gui
       firefox
+      brave
+      vscode
+      # vscodium
     ];
   };
 }

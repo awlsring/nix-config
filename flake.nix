@@ -22,6 +22,9 @@
     # Nix Systems
     systems.url = "github:nix-systems/default";
 
+    # Nix Hardware
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
     # Sops
     sops-nix.url = "github:Mic92/sops-nix";
 
@@ -73,6 +76,7 @@
     comin,
     vscode-server,
     dynamic-ip-watcher,
+    nixos-hardware,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -143,6 +147,17 @@
 
     # NixOS
     nixosConfigurations = {
+      # Framework 13
+      ched = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs outputs home-manager linuxModules wallpapers;
+        };
+        modules = [
+          nixos-hardware.nixosModules.framework-amd-ai-300-series
+          ./machines/workstations/ched
+        ];
+      };
       # Workstation - Chungus
       chungus = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

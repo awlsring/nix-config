@@ -19,7 +19,7 @@ in {
     ./hardware-configuration.nix
     home-manager.nixosModules.home-manager
   ];
-  services.vscode-server.enable = true;
+  # services.vscode-server.enable = true;
 
   networking.interfaces.enp39s0.wakeOnLan.enable = true;
 

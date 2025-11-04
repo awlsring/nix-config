@@ -171,7 +171,7 @@
         gopls
         golangci-lint-langserver
         rust-analyzer
-        dockerfile-language-server-nodejs
+        dockerfile-language-server
         pyright
         nodePackages.typescript-language-server
         lua-language-server

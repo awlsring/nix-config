@@ -13,7 +13,7 @@
   config = lib.mkIf config.gaming.enable {
     home.packages = with pkgs; [
       protontricks
-      protonup
+      protonup-ng
     ];
 
     home.sessionVariables = {

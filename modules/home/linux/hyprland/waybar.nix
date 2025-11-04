@@ -16,7 +16,7 @@
     opacity = "0.98";
   };
 in {
-  config = lib.mkIf config.hyprland.enable {
+  # config = lib.mkIf config.hyprland.enable {
     # Waybar Configuration
     programs.waybar.enable = true;
     programs.waybar.package = pkgs.waybar.overrideAttrs (oa: {
@@ -220,5 +220,5 @@ in {
         tooltip = "false";
       };
     };
-  };
+  # };
 }

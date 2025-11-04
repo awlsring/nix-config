@@ -36,8 +36,10 @@
   config = {
     programs.git = {
       enable = true;
-      userName = username;
-      userEmail = config.dev.email;
+      settings.user = {
+        name = username;
+        email = config.dev.email;
+      };
     };
 
     home.sessionVariables = lib.mkMerge [
@@ -53,11 +55,11 @@
     home.packages = with pkgs;
       [
         go
-        python313
         nodejs_22
         rustc
         cargo
         claude-code
+        codex
         go-mockery
       ]
       ++ config.dev.pkgs;

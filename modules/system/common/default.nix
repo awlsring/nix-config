@@ -23,13 +23,6 @@
     };
   };
 
-  nix = {
-    package = pkgs.nix;
-    settings = {
-      "extra-experimental-features" = ["nix-command" "flakes"];
-    };
-  };
-
   environment = {
     shells = with pkgs; [zsh];
     systemPackages = with pkgs; [

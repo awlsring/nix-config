@@ -14,8 +14,8 @@
       description = "The hostname of the system";
     };
     class = lib.mkOption {
-      type = lib.types.enum ["desktop" "server"];
-      default = "server";
+      type = lib.types.enum ["desktop" "laptop"];
+      default = "desktop";
       description = "The class of the machine";
     };
   };
