@@ -158,6 +158,7 @@
           ./machines/workstations/ched
         ];
       };
+      
       # Workstation - Chungus
       chungus = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -168,69 +169,6 @@
           vscode-server.nixosModules.default
           ./machines/workstations/chungus
         ];
-      };
-
-      # Jellyfin - Innistrad
-      innistrad = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          nfsServer = "10.0.10.180";
-          remoteDir = "/mnt/WD-6D-8T/fin";
-          localDir = "/mnt/media";
-          inherit inputs outputs linuxModules;
-        };
-        modules = [
-          srvos.nixosModules.server
-          dynamic-ip-watcher.nixosModules.dynamic-ip-watcher
-          ./machines/servers/innistrad
-        ];
-      };
-
-      # Public Reverse Proxy - Conflux
-      conflux = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs outputs linuxModules;
-        };
-        modules = [
-          disko.nixosModules.disko
-          srvos.nixosModules.server
-          srvos.nixosModules.hardware-hetzner-cloud
-          ./machines/servers/conflux
-        ];
-      };
-
-      # Dominaria
-      dominaria = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs outputs linuxModules;
-        };
-        modules = [
-          disko.nixosModules.disko
-          srvos.nixosModules.server
-          ./machines/servers/dominaria
-        ];
-      };
-
-      # Kaladesh
-      kaladesh = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          nfsServer = "10.0.10.180";
-          remoteDir = "/mnt/WD-6D-8T/frigate";
-          inherit inputs outputs linuxModules;
-        };
-        modules = [./machines/servers/kaladesh];
-      };
-
-      # Ulgrotha
-      ulgrotha = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs outputs linuxModules;
-        };
-        modules = [./machines/servers/ulgrotha];
       };
     };
 
