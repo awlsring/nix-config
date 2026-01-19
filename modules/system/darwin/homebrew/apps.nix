@@ -19,7 +19,6 @@
 
   config = lib.mkIf config.brew.enable {
     homebrew.brews = [
-      "codex"
       "cdktf"
       "cdk8s"
       "lima"

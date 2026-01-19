@@ -11,15 +11,16 @@
   };
   dev = {
     email = "contact@matthewrawlings.com";
+    pkgs = [
+      pkgs.codex
+      pkgs.opencode
+      pkgs.texlivePackages.latexmk
+    ];
   };
-  neovim.enable = true;
+  neovim.enable = false;
   tmux.enable = true;
 
   home.packages = with pkgs; [
     wakeonlan
   ];
-
-  home.shellAliases = {
-    chungus-up = "wakeonlan 00:d8:61:9e:a3:84";
-  };
 }
