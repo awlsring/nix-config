@@ -47,6 +47,10 @@
           ShowPathbar = true;
           FXEnableExtensionChangeWarning = false;
         };
+        dock = {
+          orientation = "left";
+          autohide = false;
+        };
         SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
         NSGlobalDomain = {
           "com.apple.swipescrolldirection" = false;
