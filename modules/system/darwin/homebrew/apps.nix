@@ -10,6 +10,11 @@
       default = [];
       description = "List of extra applications to install";
     };
+    extraBrews = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      description = "List of extra brews to install";
+    };
     masExtras = lib.mkOption {
       type = lib.types.attrsOf lib.types.int;
       default = {};
@@ -19,14 +24,13 @@
 
   config = lib.mkIf config.brew.enable {
     homebrew.brews = [
-      "cdktf"
       "cdk8s"
       "lima"
       "lima-additional-guestagents"
-    ];
+    ]
+    ++ config.brew.apps.extraBrews;
     homebrew.casks =
       [
-        "claude"
         "firefox"
         "discord"
         "slack"
@@ -35,7 +39,6 @@
         "1password"
         "alfred"
         "ghostty"
-        "chatgpt"
         "notion"
       ]
       ++ config.brew.apps.extras;

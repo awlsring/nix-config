@@ -159,7 +159,7 @@
         ];
       };
       
-      # Workstation - Chungus
+      # Desktop - Chungus
       chungus = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
@@ -174,13 +174,21 @@
 
     # macOS
     darwinConfigurations = {
-      # Workstation - Chad
+      # M1 Max - Chad
       chad = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = {
           inherit inputs outputs home-manager darwinModules wallpapers;
         };
         modules = [./machines/workstations/chad];
+      };
+      # M5 Prod - Chud
+      chud = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = {
+          inherit inputs outputs home-manager darwinModules wallpapers;
+        };
+        modules = [./machines/workstations/chud];
       };
     };
   };

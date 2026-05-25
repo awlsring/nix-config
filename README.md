@@ -1,16 +1,26 @@
 # Nix Configs
 
-Structure
+## Quick start
+
+### MacOS
+
+#### New Mac
+
+Prereqs
+- Nix installed
+- Homebrew installed
 
 ```
-.
-|-- core
-|-- machines
-|-- modules
-  |-- core # core modules
-  |-- home
-  |-- services
-  |-- monitoring
-|-- overlays
-|-- pkgs
+echo 'experimental-features = nix-command flakes' | sudo tee -a /etc/nix/nix.conf
+sudo launchctl kickstart -k system/org.nixos.nix-daemon
+```
+
+```
+sudo nix run nix-darwin/master#darwin-rebuild --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --flake .#<device>
+```
+
+#### Existing
+
+```
+sudo darwin-rebuild switch --flake .#<device>
 ```

@@ -32,6 +32,8 @@
       };
     };
 
+    ids.gids.nixbld = 350;
+
     system = {
       primaryUser = config.machine.username;
       keyboard = {

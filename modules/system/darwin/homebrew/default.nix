@@ -25,9 +25,6 @@
         autoUpdate = true;
         upgrade = true;
       };
-      taps = [
-        "homebrew/services"
-      ];
       brews = ["git"];
     };
   };

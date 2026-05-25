@@ -58,8 +58,6 @@
         nodejs_22
         rustc
         cargo
-        claude-code
-        codex
         go-mockery
       ]
       ++ config.dev.pkgs;
