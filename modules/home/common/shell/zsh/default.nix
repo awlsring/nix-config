@@ -25,7 +25,7 @@
       syntaxHighlighting.enable = true;
       enableCompletion = true;
       historySubstringSearch.enable = true;
-      dotDir = ".config/zsh";
+      dotDir = "${config.xdg.configHome}/zsh";
       shellAliases = lib.mkMerge [
         {
           ls = "${pkgs.eza}/bin/eza --icons -a --group-directories-first";
