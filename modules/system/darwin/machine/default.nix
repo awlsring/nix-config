@@ -49,7 +49,7 @@
         };
         dock = {
           orientation = "left";
-          autohide = false;
+          autohide = true;
         };
         SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
         NSGlobalDomain = {
